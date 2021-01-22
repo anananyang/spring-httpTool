@@ -9,5 +9,8 @@
         <module name="httpTool" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="httpTool" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

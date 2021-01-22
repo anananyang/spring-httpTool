@@ -1,4 +1,4 @@
-package demo;
+package demo.httpclient;
 
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) {
         CloseableHttpClient client = null;
         try {
+            // 创建默认的 client
             client = HttpClients.createDefault();
             MyHttpResponseHandler responseHandler = new MyHttpResponseHandler();
             httpGet(client, responseHandler);
@@ -57,7 +58,6 @@ public class Main {
         }catch (Exception e) {
             System.out.println(e);
         }
-
     }
 
 }
