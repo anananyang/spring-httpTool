@@ -57,7 +57,8 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
         scanner.setMarkerInterface(this.markerInterface);
         scanner.setResourceLoader(this.applicationContext);
         scanner.setBeanNameGenerator(this.nameGenerator);
-        scanner.registerFilters();  // 重要
+        scanner.registerFilters();  // 在这里注册需要扫描出来的注解
+        // 开始扫描
         scanner.scan(StringUtils.tokenizeToStringArray(this.basePackage, ",; \t\n"));
     }
 }

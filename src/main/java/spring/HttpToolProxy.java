@@ -3,6 +3,7 @@ package spring;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+
 public class HttpToolProxy<T> implements InvocationHandler{
 
     private Class<T> httpToolInterface;
