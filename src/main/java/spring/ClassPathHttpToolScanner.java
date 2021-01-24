@@ -7,7 +7,6 @@ import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
-import org.springframework.core.env.Environment;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.core.type.filter.AssignableTypeFilter;
 
@@ -19,7 +18,6 @@ public class ClassPathHttpToolScanner extends ClassPathBeanDefinitionScanner {
 
     private Class<? extends Annotation> annotationClass;
     private Class<?> markerInterface;
-    private HttpToolFactoryBean httpToolFactoryBean = new HttpToolFactoryBean();
 
     public ClassPathHttpToolScanner(BeanDefinitionRegistry registry, boolean useDefaultFilters) {
         super(registry, useDefaultFilters);
@@ -61,9 +59,9 @@ public class ClassPathHttpToolScanner extends ClassPathBeanDefinitionScanner {
             BeanDefinitionHolder definitionHolder = (BeanDefinitionHolder) it.next();
             GenericBeanDefinition beanDefinition = (GenericBeanDefinition) definitionHolder.getBeanDefinition();
             MutablePropertyValues mutablePropertyValues = beanDefinition.getPropertyValues();
-            // 动态代理是使用
             mutablePropertyValues.addPropertyValue("httpToolInterface", beanDefinition.getBeanClassName());
-            beanDefinition.setBeanClass(httpToolFactoryBean.getClass());
+            // 实际初始化的是一个工厂类，调用该工厂类的 getObject 方法，利用 JDK 动态代理生成一个代理对象
+            beanDefinition.setBeanClass(HttpToolFactoryBean.class);
             beanDefinition.setAutowireMode(AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE);
         }
 

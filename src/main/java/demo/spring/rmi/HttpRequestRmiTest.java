@@ -4,6 +4,5 @@ import annotation.HttpReq;
 
 @HttpReq
 public interface HttpRequestRmiTest {
-
     int getRemoteObj();
 }
