@@ -9,12 +9,12 @@
     <!--<context:component-scan base-package="demo.spring"/>-->
 
     <!--第一种实现方式-->
-    <!--<bean id="httpToolScannerConfigure" class="spring.HttpToolScannerConfigure">-->
-        <!--<property name="basePackage" value="demo.spring.rmi"></property>-->
-        <!--<property name="annotationClass" value="annotation.HttpReq"></property>-->
-    <!--</bean>-->
+    <bean id="httpToolScannerConfigure" class="spring.HttpToolScannerConfigure">
+        <property name="basePackage" value="demo.spring.rmi"></property>
+        <property name="annotationClass" value="annotation.HttpReq"></property>
+    </bean>
 
     <!--第二种实现方式-->
-    <bean id="httpTollConfigure" class="config.HttpTollConfigure"/>
+    <!--<bean id="httpTollConfigure" class="config.HttpTollConfigure"/>-->
 
 </beans>

@@ -7,6 +7,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.LaxRedirectStrategy;
+
+import javax.xml.ws.spi.http.HttpContext;
 
 public class Main {
 
@@ -14,7 +17,8 @@ public class Main {
         CloseableHttpClient client = null;
         try {
             // 创建默认的 client
-            client = HttpClients.createDefault();
+//            client = HttpClients.createDefault();
+            client = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
             MyHttpResponseHandler responseHandler = new MyHttpResponseHandler();
             httpGet(client, responseHandler);
             httpPost(client, responseHandler);
@@ -30,8 +34,8 @@ public class Main {
     }
 
     private static void httpGet(CloseableHttpClient client, MyHttpResponseHandler responseHandler) {
-        HttpGet httpGet = new HttpGet("https://www.anyanggo.tk");
-
+//        HttpGet httpGet = new HttpGet("https://www.anyanggo.tk");
+        HttpGet httpGet = new HttpGet("http://anyang.ml");
         try {
             String str = (String)client.execute(httpGet, responseHandler);
             System.out.println(str);
