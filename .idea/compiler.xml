@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="httpTool" target="8" />
+      <module name="httpTool" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

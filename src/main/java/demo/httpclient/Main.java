@@ -66,9 +66,9 @@ public class Main {
         String jsonStr = "{\"mobilephone\":\"13611111111\",\"password\":\"123456\"}";
         try {
             // 自定义代理
-            HttpHost httpHost = new HttpHost("58.220.95.30", 10174, "http");
-            RequestConfig customCofnig = RequestConfig.custom().setProxy(httpHost).build();
-            httpPost.setConfig(customCofnig);
+//            HttpHost httpHost = new HttpHost("58.220.95.30", 10174, "http");
+//            RequestConfig customCofnig = RequestConfig.custom().setProxy(httpHost).build();
+//            httpPost.setConfig(customCofnig);
             StringEntity stringEntity = new StringEntity(jsonStr);
             httpPost.setEntity(stringEntity);
             httpPost.setHeader("Content-Type", "application/json");

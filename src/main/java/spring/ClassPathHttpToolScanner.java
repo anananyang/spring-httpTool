@@ -4,6 +4,7 @@ import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
@@ -60,6 +61,7 @@ public class ClassPathHttpToolScanner extends ClassPathBeanDefinitionScanner {
             GenericBeanDefinition beanDefinition = (GenericBeanDefinition) definitionHolder.getBeanDefinition();
             MutablePropertyValues mutablePropertyValues = beanDefinition.getPropertyValues();
             mutablePropertyValues.addPropertyValue("httpToolInterface", beanDefinition.getBeanClassName());
+            mutablePropertyValues.addPropertyValue("httpClient", new RuntimeBeanReference("httpClientRmi"));
             // 实际初始化的是一个工厂类，调用该工厂类的 getObject 方法，利用 JDK 动态代理生成一个代理对象
             beanDefinition.setBeanClass(HttpToolFactoryBean.class);
             beanDefinition.setAutowireMode(AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE);
