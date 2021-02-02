@@ -37,7 +37,7 @@ public class HttpRequestConfigParser {
     }
 
 
-    public static HttpRequestBuilder parse(Class httpToolInterface,
+    public static HttpRequestConfig parse(Class httpToolInterface,
                                            Method method,
                                            Object[] args) {
 
@@ -49,7 +49,7 @@ public class HttpRequestConfigParser {
         // 解析参数注解
         parseParamAnno(httpRequestConfig, method.getParameters(), args);
 
-        return HttpReqesutBuilderStaticFactory.createHttpRequestBuilder(httpRequestConfig);
+        return httpRequestConfig;
     }
 
     /**

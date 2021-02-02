@@ -1,5 +1,7 @@
 package spring;
 
+import httpClient.HttpRequestConfig;
+import httpClient.factory.HttpReqesutBuilderStaticFactory;
 import httpClient.factory.HttpRequestBuilder;
 import httpClient.HttpRequestConfigParser;
 import org.apache.http.HttpEntity;
@@ -26,12 +28,12 @@ public class HttpToolProxy<T> implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        HttpRequestBuilder reqeustBuilder = HttpRequestConfigParser.parse(httpToolInterface, method, args);
-        HttpRequestBase httpRequestBase = reqeustBuilder.build();
+        HttpRequestConfig httpRequestConfig = HttpRequestConfigParser.parse(httpToolInterface, method, args);
+        HttpRequestBuilder requestBuilder = HttpReqesutBuilderStaticFactory.createHttpRequestBuilder(httpRequestConfig);
+        HttpRequestBase httpRequestBase = requestBuilder.build();
         HttpResponse httpResponse = null;
         try {
             httpResponse = httpClient.execute(httpRequestBase);
-            // 对 httpResponse 进行处理
             HttpEntity httpEntity = httpResponse.getEntity();
             String str = EntityUtils.toString(httpEntity, "UTF-8");
             System.out.println(str);
