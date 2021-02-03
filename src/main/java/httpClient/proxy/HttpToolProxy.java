@@ -1,9 +1,10 @@
 package httpClient.proxy;
 
 import httpClient.HttpRequestConfig;
+import httpClient.HttpRequestConfigParser;
+import spring.PropertiesResolver;
 import httpClient.factory.HttpReqesutBuilderStaticFactory;
 import httpClient.factory.HttpRequestBuilder;
-import httpClient.HttpRequestConfigParser;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -19,10 +20,16 @@ public class HttpToolProxy<T> implements InvocationHandler {
     private Class<T> httpToolInterface;
     // 默认的httpClient
     private CloseableHttpClient httpClient;
+    // properties resolve
+    private PropertiesResolver propertiesResolver;
 
-    public HttpToolProxy(Class<T> httpToolInterface, CloseableHttpClient httpClient) {
+
+    public HttpToolProxy(Class<T> httpToolInterface,
+                         CloseableHttpClient httpClient,
+                         PropertiesResolver propertiesResolver) {
         this.httpToolInterface = httpToolInterface;
         this.httpClient = httpClient;
+        this.propertiesResolver = propertiesResolver;
     }
 
     @Override

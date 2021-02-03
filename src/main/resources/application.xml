@@ -6,12 +6,13 @@
 
     <!--启用 spring 注解-->
     <context:annotation-config />
-    <!--<context:component-scan base-package="demo.spring"/>-->
+    <context:component-scan base-package="demo.spring spring"/>
 
     <!--第一种实现方式-->
     <bean id="httpToolScannerConfigure" class="spring.HttpToolScannerConfigure">
         <property name="basePackage" value="demo.spring.rmi"></property>
         <property name="annotationClass" value="httpClient.annotation.HttpReq"></property>
+        <property name="httpClientBeanName" value="httpClientRmi"></property>
     </bean>
 
     <bean id="httpClientRmi" class="httpClient.HttpClientRmi"></bean>

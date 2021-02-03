@@ -11,10 +11,10 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
         String[] name = applicationContext.getBeanDefinitionNames();
-        HttpRequestRmiTest httpRequestRmiTest = (HttpRequestRmiTest)applicationContext.getBean("httpRequestRmiTest");
-        httpRequestRmiTest.getRemoteObj(5);
+//        HttpRequestRmiTest httpRequestRmiTest = (HttpRequestRmiTest)applicationContext.getBean("httpRequestRmiTest");
+//        httpRequestRmiTest.getRemoteObj(5);
 
-        System.out.println("\n\n\n");
+//        System.out.println("\n\n\n");
 
 
         HttpReqeustRmiTest2 httpRequestRmiTest2 = (HttpReqeustRmiTest2)applicationContext.getBean("httpReqeustRmiTest2");

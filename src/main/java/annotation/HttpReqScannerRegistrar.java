@@ -1,23 +1,23 @@
 package annotation;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.EmbeddedValueResolverAware;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotationMetadata;
+import org.springframework.util.StringValueResolver;
 import spring.ClassPathHttpToolScanner;
 
 import java.lang.annotation.Annotation;
 import java.util.Map;
 
-public class HttpReqScannerRegistrar implements ImportBeanDefinitionRegistrar, ResourceLoaderAware{
+public class HttpReqScannerRegistrar implements ImportBeanDefinitionRegistrar, ResourceLoaderAware {
 
     private ResourceLoader resourceLoader;
 
@@ -45,7 +45,10 @@ public class HttpReqScannerRegistrar implements ImportBeanDefinitionRegistrar, R
         if(!BeanNameGenerator.class.equals(nameGenerator)) {
             scanner.setBeanNameGenerator(BeanUtils.instantiateClass(nameGenerator));
         }
-
+        String httpClientBeanName = annoAttrs.getString("httpClientBeanName");
+        if(StringUtils.isNotBlank(httpClientBeanName)) {
+            scanner.setHttpClientBeanName(httpClientBeanName);
+        }
         scanner.setResourceLoader(this.resourceLoader);
         scanner.registerFilters();  // 在这里注册需要扫描出来的注解
         scanner.scan(annoAttrs.getStringArray("value"));

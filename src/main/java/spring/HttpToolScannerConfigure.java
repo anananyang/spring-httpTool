@@ -8,7 +8,9 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProce
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.EmbeddedValueResolverAware;
 import org.springframework.util.StringUtils;
+import org.springframework.util.StringValueResolver;
 
 import java.lang.annotation.Annotation;
 
@@ -19,6 +21,17 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
     private Class<?> markerInterface;
     private ApplicationContext applicationContext;    // 作为默认的 classloader
     private BeanNameGenerator nameGenerator;          // 名字生成器
+//    private StringValueResolver embeddedValueResolver;  // properties 解析
+    private String HttpClientBeanName;
+//
+//    @Override
+//    public void setEmbeddedValueResolver(StringValueResolver resolver) {
+//        this.embeddedValueResolver = resolver;
+//    }
+
+    public void setHttpClientBeanName(String httpClientBeanName) {
+        HttpClientBeanName = httpClientBeanName;
+    }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
@@ -42,7 +55,8 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
     }
 
     @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {}
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+    }
 
     /**
      * 配置自定义扫描器，对指定路径下的资源进行扫描
@@ -57,6 +71,8 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
         scanner.setMarkerInterface(this.markerInterface);
         scanner.setResourceLoader(this.applicationContext);
         scanner.setBeanNameGenerator(this.nameGenerator);
+        scanner.setHttpClientBeanName(this.HttpClientBeanName);
+//        scanner.setEmbeddedValueResolver(this.embeddedValueResolver);
         scanner.registerFilters();  // 在这里注册需要扫描出来的注解
         // 开始扫描
         scanner.scan(StringUtils.tokenizeToStringArray(this.basePackage, ",; \t\n"));

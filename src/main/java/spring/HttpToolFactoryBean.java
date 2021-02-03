@@ -10,6 +10,7 @@ public class HttpToolFactoryBean<T> implements FactoryBean<T> {
 
     private Class<T> httpToolInterface;
     private CloseableHttpClient httpClient;
+    private PropertiesResolver propertiesResolver;
 
 
     public void setHttpToolInterface(Class<T> httpToolInterface) {
@@ -20,11 +21,15 @@ public class HttpToolFactoryBean<T> implements FactoryBean<T> {
         this.httpClient = httpClient;
     }
 
+    public void setPropertiesResolver(PropertiesResolver propertiesResolver) {
+        this.propertiesResolver = propertiesResolver;
+    }
+
     @Override
     public T getObject() throws Exception {
         return (T) Proxy.newProxyInstance(httpToolInterface.getClassLoader(),
                 new Class[]{httpToolInterface},
-                new HttpToolProxy(httpToolInterface, httpClient));
+                new HttpToolProxy(httpToolInterface, httpClient, propertiesResolver));
     }
 
     @Override
