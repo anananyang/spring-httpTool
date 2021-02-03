@@ -17,8 +17,7 @@ public class HttpReqBodyAnnoParser implements HttpToolParamAnnoParser {
         if(arg == null) {
             return;
         }
-        String json = JSON.toJSONString(arg);
 
-        httpReqeustBuilder.setReqBody(json);
+        httpReqeustBuilder.setReqBody(arg);
     }
 }

@@ -48,6 +48,8 @@ public class HttpToolProxy<T> implements InvocationHandler {
         } catch (Exception e) {
             System.out.println(e);
             return null;
+        } finally {
+
         }
     }
 }

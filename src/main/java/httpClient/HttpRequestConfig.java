@@ -1,5 +1,7 @@
 package httpClient;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +16,7 @@ public class HttpRequestConfig<T> {
     private String url;
     private String path;
 
-    private String reqBody;
+    private Object reqBody;
 
     private Integer connectTimeout;
     private Integer socketTimeout;
@@ -31,7 +33,7 @@ public class HttpRequestConfig<T> {
         this.url = url;
     }
 
-    public void setReqBody(String reqBody) {
+    public void setReqBody(Object reqBody) {
         this.reqBody = reqBody;
     }
 
@@ -74,7 +76,7 @@ public class HttpRequestConfig<T> {
         return path;
     }
 
-    public String getReqBody() {
+    public Object getReqBody() {
         return reqBody;
     }
 
@@ -93,5 +95,16 @@ public class HttpRequestConfig<T> {
     public Map<String, String> getParamMap() {
         return paramMap;
     }
+
+    public String getHeaderValue(String headerKey) {
+        if(StringUtils.isBlank(headerKey)) {
+            return null;
+        }
+        if(headerMap == null || headerMap.isEmpty()) {
+            return null;
+        }
+        return headerMap.get(headerKey);
+    }
+
 
 }

@@ -10,17 +10,19 @@ public class Main {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
-        HttpRequestRmiTest httpRequestRmiTest = (HttpRequestRmiTest)applicationContext.getBean("httpRequestRmiTest");
-        httpRequestRmiTest.getRemoteObj(5);
+
+
+//        HttpRequestRmiTest httpRequestRmiTest = (HttpRequestRmiTest)applicationContext.getBean("httpRequestRmiTest");
+//        httpRequestRmiTest.getRemoteObj(5);
 
         System.out.println("\n\n\n");
 
 
-//        HttpReqeustRmiTest2 httpRequestRmiTest2 = (HttpReqeustRmiTest2)applicationContext.getBean("httpReqeustRmiTest2");
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("mobilephone", "13611111111");
-//        jsonObject.put("password", "123456");
-//        httpRequestRmiTest2.getRemoteObj(jsonObject);
+        HttpReqeustRmiTest2 httpRequestRmiTest2 = (HttpReqeustRmiTest2)applicationContext.getBean("httpReqeustRmiTest2");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("mobilephone", "13611111111");
+        jsonObject.put("password", "123456");
+        httpRequestRmiTest2.getRemoteObj(jsonObject);
 
     }
 }

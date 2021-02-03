@@ -1,6 +1,9 @@
 package httpClient.factory;
 
+import com.alibaba.fastjson.JSON;
 import httpClient.HttpRequestConfig;
+import httpClient.constants.HttpContentType;
+import httpClient.constants.HttpHeader;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -47,11 +50,12 @@ public class HttpPostRequestBuilder extends HttpRequestBuilder {
      * @return
      */
     private StringEntity getHttpEntity() throws UnsupportedEncodingException{
-        String reqBody = httpRequestConfig.getReqBody();
-        if (StringUtils.isBlank(reqBody)) {
+        Object reqBody = httpRequestConfig.getReqBody();
+        if (reqBody == null) {
             return null;
         }
-        StringEntity stringEntity = new StringEntity(reqBody);
+        String bodyStr = reqBody instanceof String ? (String) reqBody : JSON.toJSONString(reqBody);
+        StringEntity stringEntity = new StringEntity(bodyStr);
         return stringEntity;
     }
 }

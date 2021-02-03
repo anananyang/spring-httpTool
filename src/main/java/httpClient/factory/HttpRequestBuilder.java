@@ -45,8 +45,8 @@ public abstract class HttpRequestBuilder {
         if(headerMap == null || headerMap.isEmpty()) {
             return null;
         }
-        Integer numOfHeadr = headerMap.size();
-        Header[] headers = new Header[numOfHeadr];
+        Integer numOfHeadrs = headerMap.size();
+        Header[] headers = new Header[numOfHeadrs];
         int index = 0;
         for(Map.Entry entry : headerMap.entrySet()) {
             String headerName = (String)entry.getKey();
@@ -56,6 +56,11 @@ public abstract class HttpRequestBuilder {
 
         return headers;
     }
+
+    protected String getHeaderValue(String headerKey) {
+        return httpRequestConfig.getHeaderValue(headerKey);
+    }
+
 
     protected List<NameValuePair> getParameters() {
         Map<String, String> paramMap = httpRequestConfig.getParamMap();
