@@ -32,7 +32,7 @@ public abstract class HttpRequestBuilder {
         return httpRequestConfig == null ? null : httpRequestConfig.getHaders();
     }
 
-    protected List<NameValuePair> getPaarameters() {
+    protected List<NameValuePair> getParameters() {
         return httpRequestConfig == null ? null : httpRequestConfig.getParameters();
     }
 
@@ -41,6 +41,9 @@ public abstract class HttpRequestBuilder {
         if(httpRequestConfig == null) {
             return null;
         }
+        /**
+         * add more request config
+         */
         RequestConfig requestConfig = RequestConfig.custom()
                 .setConnectTimeout(httpRequestConfig.getConnectTimeout())
                 .setSocketTimeout(httpRequestConfig.getSocketTimeout())

@@ -1,4 +1,4 @@
-package spring;
+package httpClient.proxy;
 
 import httpClient.HttpRequestConfig;
 import httpClient.factory.HttpReqesutBuilderStaticFactory;

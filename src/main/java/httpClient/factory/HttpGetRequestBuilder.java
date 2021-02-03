@@ -21,7 +21,7 @@ public class HttpGetRequestBuilder extends HttpRequestBuilder {
     public HttpRequestBase build() throws URISyntaxException{
 
         Header[] headers = this.getHeaders();
-        List<NameValuePair> parameters = this.getPaarameters();
+        List<NameValuePair> parameters = this.getParameters();
         RequestConfig config = this.getRequestConfig();
         URIBuilder uriBuilder = new URIBuilder(this.getUrl());
         if(parameters != null) {

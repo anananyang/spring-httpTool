@@ -22,6 +22,10 @@ public class HttpReqesutBuilderStaticFactory {
             case HttpMethod.POST:
                 return new HttpPostRequestBuilder(httpRequestConfig);
 
+            /**
+             * PUT、DELETED and so on
+             */
+
             default:
                 throw new RuntimeException("http method is unknown");
         }

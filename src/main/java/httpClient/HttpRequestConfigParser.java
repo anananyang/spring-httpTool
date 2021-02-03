@@ -2,8 +2,6 @@ package httpClient;
 
 import httpClient.annoParser.*;
 import httpClient.annotation.*;
-import httpClient.factory.HttpReqesutBuilderStaticFactory;
-import httpClient.factory.HttpRequestBuilder;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.annotation.Annotation;
@@ -42,11 +40,11 @@ public class HttpRequestConfigParser {
                                            Object[] args) {
 
         HttpRequestConfig httpRequestConfig = new HttpRequestConfig();
-        // 解析类注解
+        // parse class/interface annotation
         parseInterfaceAnno(httpRequestConfig, httpToolInterface);
-        // 解析方法注解
+        // parse method annotation
         parseMethodAnno(httpRequestConfig, method);
-        // 解析参数注解
+        // parse parameter annotation
         parseParamAnno(httpRequestConfig, method.getParameters(), args);
 
         return httpRequestConfig;
