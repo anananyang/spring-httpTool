@@ -21,7 +21,6 @@ public class Main {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("mobilephone", "13611111111");
         jsonObject.put("password", "123456");
-//        httpRequestRmiTest2.getRemoteObj("{\"mobilephone\":\"13611111111\",\"password\":\"123456\"}");
         httpRequestRmiTest2.getRemoteObj(jsonObject);
 
     }

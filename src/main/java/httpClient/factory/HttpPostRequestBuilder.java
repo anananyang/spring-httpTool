@@ -9,14 +9,15 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
+import spring.PropertiesResolver;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 
 public class HttpPostRequestBuilder extends HttpRequestBuilder {
 
-    public HttpPostRequestBuilder(HttpRequestConfig httpRequestConfig) {
-        super(httpRequestConfig);
+    public HttpPostRequestBuilder(HttpRequestConfig httpRequestConfig, PropertiesResolver propertiesResolver) {
+        super(httpRequestConfig, propertiesResolver);
     }
 
     @Override

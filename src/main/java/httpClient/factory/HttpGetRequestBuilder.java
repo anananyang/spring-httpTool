@@ -7,14 +7,15 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
+import spring.PropertiesResolver;
 
 import java.net.URISyntaxException;
 import java.util.List;
 
 public class HttpGetRequestBuilder extends HttpRequestBuilder {
 
-    public HttpGetRequestBuilder(HttpRequestConfig httpRequestConfig) {
-        super(httpRequestConfig);
+    public HttpGetRequestBuilder(HttpRequestConfig httpRequestConfig, PropertiesResolver propertiesResolver) {
+        super(httpRequestConfig, propertiesResolver);
     }
 
     @Override

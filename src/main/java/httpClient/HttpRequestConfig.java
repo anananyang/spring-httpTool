@@ -1,20 +1,6 @@
 package httpClient;
 
-import httpClient.constants.HttpMethod;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Header;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class HttpRequestConfig<T> {
@@ -100,36 +86,12 @@ public class HttpRequestConfig<T> {
         return socketTimeout;
     }
 
-    public Header[] getHaders() {
-        if(headerMap == null || headerMap.isEmpty()) {
-            return null;
-        }
-        Integer numOfHeadr = headerMap.size();
-        Header[] headers = new Header[numOfHeadr];
-        int index = 0;
-        for(Map.Entry entry : headerMap.entrySet()) {
-            String headerName = (String)entry.getKey();
-            String headerValue = (String)entry.getValue();
-            headers[index] = new BasicHeader(headerName, headerValue);
-        }
-
-        return headers;
+    public Map<String, String> getHeaderMap() {
+        return headerMap;
     }
 
-    public List<NameValuePair> getParameters() {
-        if(paramMap == null || paramMap.isEmpty()) {
-            return null;
-        }
-        Integer numOfParams = paramMap.size();
-        List<NameValuePair> list = new ArrayList<>(numOfParams);
-        for(Map.Entry entry : headerMap.entrySet()) {
-            String paramName = (String)entry.getKey();
-            String paramValue = (String)entry.getValue();
-            list.add(new BasicNameValuePair(paramName, paramValue));
-        }
-
-        return list;
+    public Map<String, String> getParamMap() {
+        return paramMap;
     }
-
 
 }

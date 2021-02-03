@@ -1,6 +1,6 @@
-package config;
+package spring.config;
 
-import annotation.HttpReqScan;
+import spring.annotation.HttpReqScan;
 import httpClient.annotation.HttpReq;
 import org.springframework.context.annotation.Configuration;
 

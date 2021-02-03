@@ -1,4 +1,4 @@
-package annotation;
+package spring.annotation;
 
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.annotation.Import;

@@ -6,7 +6,7 @@ import httpClient.annotation.HttpReqHeader;
 import httpClient.annotation.HttpReqParam;
 import httpClient.constants.HttpMethod;
 
-@HttpReq(url = "https://www.anyanggo.tk")
+@HttpReq(url = "${https://www.anyanggo.tk}")
 //@HttpReq(url = "www.anyanggo.tk")
 public interface HttpRequestRmiTest {
 

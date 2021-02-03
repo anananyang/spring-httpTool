@@ -20,7 +20,7 @@ public class HttpToolProxy<T> implements InvocationHandler {
     private Class<T> httpToolInterface;
     // 默认的httpClient
     private CloseableHttpClient httpClient;
-    // properties resolve
+    // resolve properties
     private PropertiesResolver propertiesResolver;
 
 
@@ -36,7 +36,7 @@ public class HttpToolProxy<T> implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
         HttpRequestConfig httpRequestConfig = HttpRequestConfigParser.parse(httpToolInterface, method, args);
-        HttpRequestBuilder requestBuilder = HttpReqesutBuilderStaticFactory.createHttpRequestBuilder(httpRequestConfig);
+        HttpRequestBuilder requestBuilder = HttpReqesutBuilderStaticFactory.createHttpRequestBuilder(httpRequestConfig, propertiesResolver);
         HttpRequestBase httpRequestBase = requestBuilder.build();
         HttpResponse httpResponse = null;
         try {
