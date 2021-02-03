@@ -1,8 +1,6 @@
 package httpClient.factory;
 
 import httpClient.HttpRequestConfig;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
