@@ -6,7 +6,7 @@ import httpClient.constants.HttpContentType;
 import httpClient.constants.HttpHeader;
 import httpClient.constants.HttpMethod;
 
-@HttpReq(url = "${anyang.login.url}")
+@HttpReq(domain = "${anyang.login.url}")
 public interface HttpReqeustRmiTest2 {
 
     @HttpReqHeader(name = HttpHeader.CONTENT_TYPE, value = HttpContentType.APPLICATION_JSON)

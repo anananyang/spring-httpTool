@@ -10,6 +10,7 @@ public class HttpReqAnnoParser implements HttpToolAnnoParser{
     @Override
     public void parse(Annotation annotation, HttpRequestConfig httpRequestConfig) {
         HttpReq httpReq = (HttpReq)annotation;
-        httpRequestConfig.setUrl(httpReq.url());
+        String domain = httpReq.domain();
+        httpRequestConfig.setDomain(domain);
     }
 }

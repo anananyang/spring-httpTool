@@ -32,14 +32,18 @@ public abstract class HttpRequestBuilder {
     public abstract HttpRequestBase build() throws URISyntaxException, UnsupportedEncodingException;
 
     protected String getUrl() {
-        String url = httpRequestConfig.getUrl();
+        return getDomain() + getPath();
+    }
+
+    protected String getDomain() {
+        String domain = httpRequestConfig.getDomain();
+        return propertiesResolver.resolveStringValue(domain);
+    }
+
+    protected String getPath() {
         String path = httpRequestConfig.getPath();
         path = resolvePathVariable(path);
-
-        url = propertiesResolver.resolveStringValue(url);
-        path = propertiesResolver.resolveStringValue(path);
-        // TODO 简陋版，需要重构的
-        return url + path;
+        return propertiesResolver.resolveStringValue(path);
     }
 
     protected Header[] getHeaders() {

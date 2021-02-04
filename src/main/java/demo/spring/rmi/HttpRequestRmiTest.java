@@ -3,7 +3,7 @@ package demo.spring.rmi;
 import httpClient.annotation.*;
 import httpClient.constants.HttpMethod;
 
-@HttpReq(url = "${anyang.go.domain}")
+@HttpReq(domain = "${anyang.go.domain}")
 //@HttpReq(url = "www.anyanggo.tk")
 public interface HttpRequestRmiTest {
 

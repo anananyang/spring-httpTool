@@ -8,5 +8,5 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Component
 public @interface HttpReq {
-    String url();
+    String domain();
 }

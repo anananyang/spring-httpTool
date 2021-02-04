@@ -14,7 +14,7 @@ public class HttpRequestConfig<T> {
     private String httpMethod;
     private String entityType;
 
-    private String url;
+    private String domain;
     private String path;
 
     private Object reqBody;
@@ -35,8 +35,8 @@ public class HttpRequestConfig<T> {
         this.entityType = entityType;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
     public void setReqBody(Object reqBody) {
@@ -84,8 +84,8 @@ public class HttpRequestConfig<T> {
         return entityType;
     }
 
-    public String getUrl() {
-        return url;
+    public String getDomain() {
+        return domain;
     }
 
     public String getPath() {
