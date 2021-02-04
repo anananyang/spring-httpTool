@@ -20,7 +20,8 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
     private ApplicationContext applicationContext;    // 作为默认的 classloader
     private BeanNameGenerator nameGenerator;          // 名字生成器
 //    private StringValueResolver embeddedValueResolver;  // properties 解析
-    private String HttpClientBeanName;
+    private String httpClientBeanName;
+    private String propertiesResolverName;
 //
 //    @Override
 //    public void setEmbeddedValueResolver(StringValueResolver resolver) {
@@ -28,7 +29,11 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
 //    }
 
     public void setHttpClientBeanName(String httpClientBeanName) {
-        HttpClientBeanName = httpClientBeanName;
+        this.httpClientBeanName = httpClientBeanName;
+    }
+
+    public void setPropertiesResolverName(String propertiesResolverName) {
+        this.propertiesResolverName = propertiesResolverName;
     }
 
     @Override
@@ -69,7 +74,8 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
         scanner.setMarkerInterface(this.markerInterface);
         scanner.setResourceLoader(this.applicationContext);
         scanner.setBeanNameGenerator(this.nameGenerator);
-        scanner.setHttpClientBeanName(this.HttpClientBeanName);
+        scanner.setHttpClientBeanName(this.httpClientBeanName);
+        scanner.setPropertiesResolverName(this.propertiesResolverName);
 //        scanner.setEmbeddedValueResolver(this.embeddedValueResolver);
         scanner.registerFilters();  // 在这里注册需要扫描出来的注解
         // 开始扫描

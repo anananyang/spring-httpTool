@@ -36,17 +36,23 @@ public class HttpReqScannerRegistrar implements ImportBeanDefinitionRegistrar, R
             scanner.setAnnotationClass(annotationClass);
         }
         Class<?> markerInterface = annoAttrs.getClass("markerInterface");
-        if(!Class.class.equals(markerInterface)) {
+        if (!Class.class.equals(markerInterface)) {
             scanner.setMarkerInterface(markerInterface);
         }
         Class<? extends BeanNameGenerator> nameGenerator = annoAttrs.getClass("nameGenerator");
-        if(!BeanNameGenerator.class.equals(nameGenerator)) {
+        if (!BeanNameGenerator.class.equals(nameGenerator)) {
             scanner.setBeanNameGenerator(BeanUtils.instantiateClass(nameGenerator));
         }
         String httpClientBeanName = annoAttrs.getString("httpClientBeanName");
-        if(StringUtils.isNotBlank(httpClientBeanName)) {
+        if (StringUtils.isNotBlank(httpClientBeanName)) {
             scanner.setHttpClientBeanName(httpClientBeanName);
         }
+
+        String propertiesResolverName = annoAttrs.getString("propertiesResolverName");
+        if (StringUtils.isNotBlank(propertiesResolverName)) {
+            scanner.setPropertiesResolverName(propertiesResolverName);
+        }
+
         scanner.setResourceLoader(this.resourceLoader);
         scanner.registerFilters();  // 在这里注册需要扫描出来的注解
         scanner.scan(annoAttrs.getStringArray("value"));

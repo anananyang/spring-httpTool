@@ -21,4 +21,6 @@ public @interface HttpReqScan {
 
     String httpClientBeanName();
 
+    String propertiesResolverName();
+
 }
