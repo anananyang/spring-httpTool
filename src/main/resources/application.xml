@@ -19,6 +19,6 @@
     <bean id="httpClientRmi" class="httpClient.HttpClientRmi"></bean>
 
     <!--第二种实现方式-->
-    <!--<bean id="httpTollConfigure" class="config.HttpTollConfigure"/>-->
+    <!--<bean id="httpTollConfigure" class="requestConfig.HttpTollConfigure"/>-->
 
 </beans>

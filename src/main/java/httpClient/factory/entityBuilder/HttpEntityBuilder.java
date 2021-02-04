@@ -1,6 +1,6 @@
 package httpClient.factory.entityBuilder;
 
-import httpClient.HttpRequestConfig;
+import httpClient.requestConfig.HttpRequestConfig;
 import org.apache.http.HttpEntity;
 
 import java.io.UnsupportedEncodingException;

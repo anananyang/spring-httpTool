@@ -1,11 +1,9 @@
-package httpClient;
-
-import org.apache.commons.lang3.StringUtils;
+package httpClient.requestConfig;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class HttpRequestConfig<T> {
+public class HttpRequestCustomerConfig<T> {
 
     /**
      * http request method
@@ -56,21 +54,21 @@ public class HttpRequestConfig<T> {
     }
 
     public void addHeader(String name, String value) {
-        if(headerMap == null) {
+        if (headerMap == null) {
             headerMap = new HashMap<>();
         }
         headerMap.put(name, value);
     }
 
     public void addParam(String name, String value) {
-        if(paramMap == null) {
+        if (paramMap == null) {
             paramMap = new HashMap<>();
         }
         paramMap.put(name, value);
     }
 
     public void addPathVaribale(String name, String value) {
-        if(pathVariableMap == null) {
+        if (pathVariableMap == null) {
             pathVariableMap = new HashMap<>();
         }
         pathVariableMap.put(name, value);
@@ -115,15 +113,4 @@ public class HttpRequestConfig<T> {
     public Map<String, String> getPathVariableMap() {
         return pathVariableMap;
     }
-
-    public String getHeaderValue(String headerKey) {
-        if(StringUtils.isBlank(headerKey)) {
-            return null;
-        }
-        if(headerMap == null || headerMap.isEmpty()) {
-            return null;
-        }
-        return headerMap.get(headerKey);
-    }
-
 }

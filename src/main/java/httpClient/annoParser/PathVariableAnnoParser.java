@@ -1,6 +1,6 @@
 package httpClient.annoParser;
 
-import httpClient.HttpRequestConfig;
+import httpClient.requestConfig.HttpRequestCustomerConfig;
 import httpClient.annotation.PathVariable;
 
 import java.lang.annotation.Annotation;
@@ -12,7 +12,7 @@ public class PathVariableAnnoParser implements HttpToolParamAnnoParser {
     public void parse(Annotation annotation,
                       Parameter parameter,
                       Object arg,
-                      HttpRequestConfig httpRequestConfig) {
+                      HttpRequestCustomerConfig httpRequestConfig) {
 
         PathVariable pathVariable = (PathVariable) annotation;
         String name = pathVariable.name();

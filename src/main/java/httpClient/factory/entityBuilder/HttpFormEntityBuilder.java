@@ -1,7 +1,12 @@
 package httpClient.factory.entityBuilder;
 
-import httpClient.HttpRequestConfig;
+import httpClient.requestConfig.HttpRequestConfig;
+import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+
+import java.util.List;
 
 public class HttpFormEntityBuilder extends HttpEntityBuilder {
 
@@ -9,13 +14,14 @@ public class HttpFormEntityBuilder extends HttpEntityBuilder {
         super(httpRequestConfig);
     }
 
-    /**
-     * TODO
-     *
-     * @return
-     */
+
     @Override
     public HttpEntity build() {
-        return null;
+
+        List<NameValuePair> parameters = httpRequestConfig.getParameters();
+        if(parameters == null || parameters.size() == 0) {
+            return null;
+        }
+        return new UrlEncodedFormEntity(parameters, Consts.UTF_8);
     }
 }

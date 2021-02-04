@@ -1,7 +1,7 @@
 package httpClient.factory.reqeustBuilder;
 
-import httpClient.HttpRequestConfig;
 import httpClient.factory.entityBuilder.HttpEntityStaticFactory;
+import httpClient.requestConfig.HttpRequestConfig;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -9,7 +9,6 @@ import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
-import spring.PropertiesResolver;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -17,8 +16,8 @@ import java.util.List;
 
 public class HttpPostRequestBuilder extends HttpRequestBuilder {
 
-    public HttpPostRequestBuilder(HttpRequestConfig httpRequestConfig, PropertiesResolver propertiesResolver) {
-        super(httpRequestConfig, propertiesResolver);
+    public HttpPostRequestBuilder(HttpRequestConfig httpRequestConfig) {
+        super(httpRequestConfig);
     }
 
     @Override
@@ -46,11 +45,7 @@ public class HttpPostRequestBuilder extends HttpRequestBuilder {
         return httpPost;
     }
 
-    /**
-     * 默认用 stringEntity
-     *
-     * @return
-     */
+
     private HttpEntity getHttpEntity() throws UnsupportedEncodingException{
         return HttpEntityStaticFactory.createHttpEntityBuilder(this.httpRequestConfig).build();
     }

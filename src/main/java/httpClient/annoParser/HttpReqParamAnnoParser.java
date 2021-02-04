@@ -1,7 +1,7 @@
 package httpClient.annoParser;
 
+import httpClient.requestConfig.HttpRequestCustomerConfig;
 import httpClient.annotation.HttpReqParam;
-import httpClient.HttpRequestConfig;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.annotation.Annotation;
@@ -21,7 +21,7 @@ public class HttpReqParamAnnoParser implements HttpToolParamAnnoParser {
     public void parse(Annotation annotation,
                       Parameter parameter,
                       Object arg,
-                      HttpRequestConfig httpRequestConfig) {
+                      HttpRequestCustomerConfig httpRequestConfig) {
         HttpReqParam httpReqParam = (HttpReqParam) annotation;
         String paramName = httpReqParam != null ? httpReqParam.value() : null;
         if(StringUtils.isBlank(paramName)) {

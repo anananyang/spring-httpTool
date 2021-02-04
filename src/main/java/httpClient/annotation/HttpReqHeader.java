@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface HttpReqHeader {
     String name();
-    String value();
+    String value() default "";
 }

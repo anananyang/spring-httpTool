@@ -1,6 +1,6 @@
 package httpClient.factory.entityBuilder;
 
-import httpClient.HttpRequestConfig;
+import httpClient.requestConfig.HttpRequestConfig;
 import org.apache.http.HttpEntity;
 
 public class HttpFileEntityBuilder extends HttpEntityBuilder{
@@ -9,13 +9,8 @@ public class HttpFileEntityBuilder extends HttpEntityBuilder{
         super(httpRequestConfig);
     }
 
-    /**
-     * TODO
-     *
-     * @return
-     */
     @Override
     public HttpEntity build() {
-        return null;
+       throw new RuntimeException("Not support FileEntity at the moment");
     }
 }
