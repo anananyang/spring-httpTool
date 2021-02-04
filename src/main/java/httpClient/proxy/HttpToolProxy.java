@@ -1,16 +1,17 @@
 package httpClient.proxy;
 
+import httpClient.responseHandle.HttpResoponseHandler;
 import httpClient.factory.reqeustBuilder.HttpReqesutBuilderStaticFactory;
 import httpClient.factory.reqeustBuilder.HttpRequestBuilder;
 import httpClient.requestConfig.HttpRequestConfig;
 import httpClient.requestConfig.HttpRequestConfigAdapter;
 import httpClient.requestConfig.HttpRequestConfigParser;
 import httpClient.requestConfig.HttpRequestCustomerConfig;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.util.EntityUtils;
+import org.apache.http.util.Asserts;
 import spring.PropertiesResolver;
 
 import java.lang.reflect.InvocationHandler;
@@ -24,14 +25,24 @@ public class HttpToolProxy<T> implements InvocationHandler {
     private CloseableHttpClient httpClient;
     // resolve properties
     private PropertiesResolver propertiesResolver;
+    // reponse handle
+    private HttpResoponseHandler resoponseHandler;
 
 
     public HttpToolProxy(Class<T> httpToolInterface,
                          CloseableHttpClient httpClient,
-                         PropertiesResolver propertiesResolver) {
+                         PropertiesResolver propertiesResolver,
+                         HttpResoponseHandler resoponseHandler) {
+
+        Asserts.notNull(httpToolInterface, "httpToolInterface");
+        Asserts.notNull(httpClient, "httpClient");
+        Asserts.notNull(propertiesResolver, "propertiesResolver");
+        Asserts.notNull(resoponseHandler, "resoponseHandler");
+
         this.httpToolInterface = httpToolInterface;
         this.httpClient = httpClient;
         this.propertiesResolver = propertiesResolver;
+        this.resoponseHandler = resoponseHandler;
     }
 
     @Override
@@ -40,19 +51,20 @@ public class HttpToolProxy<T> implements InvocationHandler {
         HttpRequestCustomerConfig customerConfig = HttpRequestConfigParser.parse(httpToolInterface, method, args);
         HttpRequestConfig httpRequestConfig = new HttpRequestConfigAdapter(customerConfig, propertiesResolver);
         HttpRequestBuilder requestBuilder = HttpReqesutBuilderStaticFactory.createHttpRequestBuilder(httpRequestConfig);
-        HttpRequestBase httpRequestBase = requestBuilder.build();
+        HttpRequestBase httpRequest = requestBuilder.build();
+        HttpClientContext context = HttpClientContext.create();
         HttpResponse httpResponse = null;
         try {
-            httpResponse = httpClient.execute(httpRequestBase);
-            HttpEntity httpEntity = httpResponse.getEntity();
-            String str = EntityUtils.toString(httpEntity, "UTF-8");
-            System.out.println(str);
-            return str;
+            Long startMillis = System.currentTimeMillis();
+            httpResponse = httpClient.execute(httpRequest, context);
+            Long endMillis = System.currentTimeMillis();
+
+            System.out.println("total time: " + (endMillis - startMillis) + "ms");
+
+            return resoponseHandler.handle(method, httpRequest, httpResponse);
         } catch (Exception e) {
             System.out.println(e);
-            return null;
-        } finally {
-
+            throw e;
         }
     }
 }

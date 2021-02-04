@@ -5,7 +5,7 @@ import org.apache.http.Header;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.springframework.util.Assert;
+import org.apache.http.util.Asserts;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
@@ -16,7 +16,7 @@ public abstract class HttpRequestBuilder {
     protected HttpRequestConfig httpRequestConfig;
 
     public HttpRequestBuilder(HttpRequestConfig httpRequestConfig) {
-        Assert.notNull(httpRequestConfig);
+        Asserts.notNull(httpRequestConfig, "httpRequestConfig");
         this.httpRequestConfig = httpRequestConfig;
     }
 
@@ -36,7 +36,7 @@ public abstract class HttpRequestBuilder {
     }
 
     protected Header[] getHeaders() {
-       return httpRequestConfig.getHeaders();
+        return httpRequestConfig.getHeaders();
     }
 
     protected List<NameValuePair> getParameters() {
@@ -45,7 +45,7 @@ public abstract class HttpRequestBuilder {
 
 
     protected RequestConfig getRequestConfig() {
-        if(httpRequestConfig == null) {
+        if (httpRequestConfig == null) {
             return null;
         }
         /**
