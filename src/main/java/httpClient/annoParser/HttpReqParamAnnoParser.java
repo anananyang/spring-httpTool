@@ -15,13 +15,13 @@ public class HttpReqParamAnnoParser implements HttpToolParamAnnoParser {
      * @param annotation
      * @param parameter
      * @param arg
-     * @param httpReqeustBuilder
+     * @param httpRequestConfig
      */
     @Override
     public void parse(Annotation annotation,
                       Parameter parameter,
                       Object arg,
-                      HttpRequestConfig httpReqeustBuilder) {
+                      HttpRequestConfig httpRequestConfig) {
         HttpReqParam httpReqParam = (HttpReqParam) annotation;
         String paramName = httpReqParam != null ? httpReqParam.value() : null;
         if(StringUtils.isBlank(paramName)) {
@@ -29,6 +29,6 @@ public class HttpReqParamAnnoParser implements HttpToolParamAnnoParser {
             return;
         }
         String paramValue = arg == null ? null : arg.toString();
-        httpReqeustBuilder.addParam(paramName, paramValue);
+        httpRequestConfig.addParam(paramName, paramValue);
     }
 }

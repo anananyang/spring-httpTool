@@ -8,9 +8,7 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProce
 import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.EmbeddedValueResolverAware;
 import org.springframework.util.StringUtils;
-import org.springframework.util.StringValueResolver;
 
 import java.lang.annotation.Annotation;
 

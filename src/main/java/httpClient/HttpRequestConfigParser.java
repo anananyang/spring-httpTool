@@ -32,6 +32,7 @@ public class HttpRequestConfigParser {
 
         paramAnnoParserMap.put(HttpReqBody.class.getSimpleName(), new HttpReqBodyAnnoParser());
         paramAnnoParserMap.put(HttpReqParam.class.getSimpleName(), new HttpReqParamAnnoParser());
+        paramAnnoParserMap.put(PathVariable.class.getSimpleName(), new PathVariableAnnoParser());
     }
 
 

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.core.type.filter.AssignableTypeFilter;
-import org.springframework.util.StringValueResolver;
 
 import java.lang.annotation.Annotation;
 import java.util.Iterator;

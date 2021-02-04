@@ -10,7 +10,7 @@ import java.lang.annotation.Annotation;
 public class HttpReqHeaderAnnoParser implements HttpToolAnnoParser{
 
     @Override
-    public void parse(Annotation annotation, HttpRequestConfig httpReqeustBuilder) {
+    public void parse(Annotation annotation, HttpRequestConfig httpRequestConfig) {
         HttpReqHeader httpReqHeader = (HttpReqHeader) annotation;
 
         String haederName = httpReqHeader.name();
@@ -19,6 +19,6 @@ public class HttpReqHeaderAnnoParser implements HttpToolAnnoParser{
             return;
         }
 
-        httpReqeustBuilder.addHeader(haederName, headerValue);
+        httpRequestConfig.addHeader(haederName, headerValue);
     }
 }

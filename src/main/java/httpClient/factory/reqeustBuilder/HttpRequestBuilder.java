@@ -1,6 +1,7 @@
-package httpClient.factory;
+package httpClient.factory.reqeustBuilder;
 
 import httpClient.HttpRequestConfig;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
@@ -33,6 +34,7 @@ public abstract class HttpRequestBuilder {
     protected String getUrl() {
         String url = httpRequestConfig.getUrl();
         String path = httpRequestConfig.getPath();
+        path = resolvePathVariable(path);
 
         url = propertiesResolver.resolveStringValue(url);
         path = propertiesResolver.resolveStringValue(path);
@@ -92,6 +94,29 @@ public abstract class HttpRequestBuilder {
                 .build();
 
         return requestConfig;
+    }
+
+
+    private String resolvePathVariable(String path) {
+        if(StringUtils.isBlank(path)) {
+            return path;
+        }
+        Map<String, String> pathVariabelMap = httpRequestConfig.getPathVariableMap();
+        if(pathVariabelMap == null || pathVariabelMap.isEmpty()) {
+            return path;
+        }
+
+        for(Map.Entry entry : pathVariabelMap.entrySet()) {
+            String name = (String) entry.getKey();
+            if(StringUtils.isBlank(name)) {
+                continue;
+            }
+            String value = (String) entry.getValue();
+            String match = "\\{" + name + "\\}";
+            path = path.replaceAll(match, value);
+        }
+
+        return path;
     }
 
 }

@@ -1,8 +1,8 @@
 package spring.config;
 
-import spring.annotation.HttpReqScan;
 import httpClient.annotation.HttpReq;
 import org.springframework.context.annotation.Configuration;
+import spring.annotation.HttpReqScan;
 
 @Configuration
 @HttpReqScan(value = {"demo.spring"}, annotationClass = HttpReq.class, httpClientBeanName = "httpClientRmi")

@@ -1,21 +1,19 @@
-package httpClient.factory;
+package httpClient.factory.reqeustBuilder;
 
-import com.alibaba.fastjson.JSON;
 import httpClient.HttpRequestConfig;
-import httpClient.constants.HttpContentType;
-import httpClient.constants.HttpHeader;
-import org.apache.commons.lang3.StringUtils;
+import httpClient.factory.entityBuilder.HttpEntityStaticFactory;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.StringEntity;
 import spring.PropertiesResolver;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 public class HttpPostRequestBuilder extends HttpRequestBuilder {
 
@@ -27,9 +25,13 @@ public class HttpPostRequestBuilder extends HttpRequestBuilder {
     public HttpRequestBase build() throws URISyntaxException, UnsupportedEncodingException{
 
         Header[] headers = this.getHeaders();
+        List<NameValuePair> parameters = this.getParameters();
         RequestConfig config = this.getRequestConfig();
-        URIBuilder uriBuilder = new URIBuilder(this.getUrl());
         HttpEntity httpEntity = this.getHttpEntity();
+        URIBuilder uriBuilder = new URIBuilder(this.getUrl());
+        if(parameters != null) {
+            uriBuilder.setParameters(parameters);
+        }
 
         HttpPost httpPost = new HttpPost(uriBuilder.build());
         if (headers != null) {
@@ -49,13 +51,7 @@ public class HttpPostRequestBuilder extends HttpRequestBuilder {
      *
      * @return
      */
-    private StringEntity getHttpEntity() throws UnsupportedEncodingException{
-        Object reqBody = httpRequestConfig.getReqBody();
-        if (reqBody == null) {
-            return null;
-        }
-        String bodyStr = reqBody instanceof String ? (String) reqBody : JSON.toJSONString(reqBody);
-        StringEntity stringEntity = new StringEntity(bodyStr);
-        return stringEntity;
+    private HttpEntity getHttpEntity() throws UnsupportedEncodingException{
+        return HttpEntityStaticFactory.createHttpEntityBuilder(this.httpRequestConfig).build();
     }
 }

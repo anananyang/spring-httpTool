@@ -13,11 +13,11 @@ public class HttpReqBodyAnnoParser implements HttpToolParamAnnoParser {
     public void parse(Annotation annotation,
                       Parameter parameter,
                       Object arg,
-                      HttpRequestConfig httpReqeustBuilder) {
+                      HttpRequestConfig httpRequestConfig) {
         if(arg == null) {
             return;
         }
 
-        httpReqeustBuilder.setReqBody(arg);
+        httpRequestConfig.setReqBody(arg);
     }
 }

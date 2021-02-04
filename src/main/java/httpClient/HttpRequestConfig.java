@@ -12,6 +12,7 @@ public class HttpRequestConfig<T> {
      * only support Get、Post now
      */
     private String httpMethod;
+    private String entityType;
 
     private String url;
     private String path;
@@ -23,10 +24,15 @@ public class HttpRequestConfig<T> {
 
     private Map<String, String> headerMap;
     private Map<String, String> paramMap;
+    private Map<String, String> pathVariableMap;
 
 
     public void setHttpMethod(String httpMethod) {
         this.httpMethod = httpMethod;
+    }
+
+    public void setEntityType(String entityType) {
+        this.entityType = entityType;
     }
 
     public void setUrl(String url) {
@@ -63,9 +69,19 @@ public class HttpRequestConfig<T> {
         paramMap.put(name, value);
     }
 
+    public void addPathVaribale(String name, String value) {
+        if(pathVariableMap == null) {
+            pathVariableMap = new HashMap<>();
+        }
+        pathVariableMap.put(name, value);
+    }
 
     public String getHttpMethod() {
         return httpMethod;
+    }
+
+    public String getEntityType() {
+        return entityType;
     }
 
     public String getUrl() {
@@ -96,6 +112,10 @@ public class HttpRequestConfig<T> {
         return paramMap;
     }
 
+    public Map<String, String> getPathVariableMap() {
+        return pathVariableMap;
+    }
+
     public String getHeaderValue(String headerKey) {
         if(StringUtils.isBlank(headerKey)) {
             return null;
@@ -105,6 +125,5 @@ public class HttpRequestConfig<T> {
         }
         return headerMap.get(headerKey);
     }
-
 
 }

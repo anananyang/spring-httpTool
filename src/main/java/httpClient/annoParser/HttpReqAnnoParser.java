@@ -8,8 +8,8 @@ import java.lang.annotation.Annotation;
 public class HttpReqAnnoParser implements HttpToolAnnoParser{
 
     @Override
-    public void parse(Annotation annotation, HttpRequestConfig httpReqeustBuilder) {
+    public void parse(Annotation annotation, HttpRequestConfig httpRequestConfig) {
         HttpReq httpReq = (HttpReq)annotation;
-        httpReqeustBuilder.setUrl(httpReq.url());
+        httpRequestConfig.setUrl(httpReq.url());
     }
 }

@@ -10,5 +10,5 @@ public interface HttpToolParamAnnoParser {
     void parse(Annotation annotation,
                Parameter parameter,
                Object arg,
-               HttpRequestConfig httpReqeustBuilder);
+               HttpRequestConfig httpRequestConfig);
 }
