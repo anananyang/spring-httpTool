@@ -1,6 +1,6 @@
 package httpClient.factory.reqeustBuilder;
 
-import httpClient.requestConfig.HttpRequestConfig;
+import httpClient.request.HttpRequestConfig;
 import org.apache.http.Header;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;

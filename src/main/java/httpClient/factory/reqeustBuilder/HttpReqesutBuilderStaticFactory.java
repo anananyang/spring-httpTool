@@ -2,9 +2,9 @@ package httpClient.factory.reqeustBuilder;
 
 
 import httpClient.constants.HttpMethod;
-import httpClient.requestConfig.HttpRequestConfig;
-import httpClient.requestConfig.HttpRequestConfigAdapter;
-import httpClient.requestConfig.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestConfig;
+import httpClient.request.HttpRequestConfigAdapter;
+import httpClient.request.HttpRequestCustomerConfig;
 import org.apache.commons.lang3.StringUtils;
 import spring.PropertiesResolver;
 

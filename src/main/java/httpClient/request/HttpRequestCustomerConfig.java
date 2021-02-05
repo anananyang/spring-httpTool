@@ -1,6 +1,4 @@
-package httpClient.requestConfig;
-
-import com.sun.corba.se.spi.ior.ObjectKey;
+package httpClient.request;
 
 import java.util.HashMap;
 import java.util.Map;

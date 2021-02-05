@@ -1,7 +1,7 @@
 package httpClient.annoParser;
 
 import httpClient.annotation.HttpReqHeader;
-import httpClient.requestConfig.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestCustomerConfig;
 import org.apache.commons.lang3.StringUtils;
 
 

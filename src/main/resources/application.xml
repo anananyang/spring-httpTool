@@ -21,6 +21,6 @@
     <bean id="propertiesResolver" class="spring.PropertiesResolver"></bean>
 
     <!--第二种实现方式-->
-    <!--<bean id="httpTollConfigure" class="requestConfig.HttpTollConfigure"/>-->
+    <!--<bean id="httpTollConfigure" class="request.HttpTollConfigure"/>-->
 
 </beans>

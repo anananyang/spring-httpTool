@@ -1,7 +1,6 @@
 package httpClient.factory.entityBuilder;
 
-import httpClient.requestConfig.HttpRequestConfig;
-import httpClient.requestConfig.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestConfig;
 import httpClient.constants.HttpEntityType;
 import org.apache.commons.lang3.StringUtils;
 

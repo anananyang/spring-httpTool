@@ -1,4 +1,4 @@
-package httpClient.requestConfig;
+package httpClient.request;
 
 import org.apache.http.Header;
 import org.apache.http.NameValuePair;

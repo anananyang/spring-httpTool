@@ -1,12 +1,12 @@
 package httpClient.proxy;
 
-import httpClient.responseHandle.HttpResoponseHandler;
+import httpClient.response.HttpResoponseHandler;
 import httpClient.factory.reqeustBuilder.HttpReqesutBuilderStaticFactory;
 import httpClient.factory.reqeustBuilder.HttpRequestBuilder;
-import httpClient.requestConfig.HttpRequestConfig;
-import httpClient.requestConfig.HttpRequestConfigAdapter;
-import httpClient.requestConfig.HttpRequestConfigParser;
-import httpClient.requestConfig.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestConfig;
+import httpClient.request.HttpRequestConfigAdapter;
+import httpClient.request.HttpRequestConfigParser;
+import httpClient.request.HttpRequestCustomerConfig;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.protocol.HttpClientContext;

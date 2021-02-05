@@ -1,4 +1,4 @@
-package httpClient.requestConfig;
+package httpClient.request;
 
 import httpClient.annoParser.*;
 import httpClient.annotation.*;

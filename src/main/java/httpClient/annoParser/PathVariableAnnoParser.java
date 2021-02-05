@@ -1,6 +1,6 @@
 package httpClient.annoParser;
 
-import httpClient.requestConfig.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestCustomerConfig;
 import httpClient.annotation.PathVariable;
 
 import java.lang.annotation.Annotation;

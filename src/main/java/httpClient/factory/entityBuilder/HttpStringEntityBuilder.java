@@ -1,7 +1,7 @@
 package httpClient.factory.entityBuilder;
 
 import com.alibaba.fastjson.JSON;
-import httpClient.requestConfig.HttpRequestConfig;
+import httpClient.request.HttpRequestConfig;
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.StringEntity;
 

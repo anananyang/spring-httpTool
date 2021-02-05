@@ -2,7 +2,7 @@ package httpClient.annoParser;
 
 
 import httpClient.annotation.HttpReqConfig;
-import httpClient.requestConfig.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestCustomerConfig;
 
 import java.lang.annotation.Annotation;
 

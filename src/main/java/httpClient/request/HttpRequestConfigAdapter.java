@@ -1,4 +1,4 @@
-package httpClient.requestConfig;
+package httpClient.request;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
@@ -92,7 +92,7 @@ public class HttpRequestConfigAdapter implements HttpRequestConfig {
             return null;
         }
         /**
-         * add more request requestConfig
+         * add more request request
          */
         RequestConfig requestConfig = RequestConfig.custom()
                 .setConnectTimeout(httpRequestConfig.getConnectTimeout())

@@ -1,7 +1,7 @@
 package httpClient.factory.reqeustBuilder;
 
 import httpClient.factory.entityBuilder.HttpEntityStaticFactory;
-import httpClient.requestConfig.HttpRequestConfig;
+import httpClient.request.HttpRequestConfig;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;

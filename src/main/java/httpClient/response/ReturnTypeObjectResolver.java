@@ -1,4 +1,4 @@
-package httpClient.responseHandle;
+package httpClient.response;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;

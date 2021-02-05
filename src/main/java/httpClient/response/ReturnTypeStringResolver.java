@@ -1,4 +1,4 @@
-package httpClient.responseHandle;
+package httpClient.response;
 
 import java.lang.reflect.Type;
 

@@ -1,6 +1,6 @@
 package spring;
 
-import httpClient.responseHandle.HttpResoponseHandler;
+import httpClient.response.HttpResoponseHandler;
 import httpClient.proxy.HttpToolProxy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.springframework.beans.factory.FactoryBean;
