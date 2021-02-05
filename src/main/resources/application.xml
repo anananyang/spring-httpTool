@@ -13,11 +13,18 @@
     <bean id="httpToolScannerConfigure" class="spring.HttpToolScannerConfigure">
         <property name="basePackage" value="demo.spring.rmi"></property>
         <property name="annotationClass" value="httpClient.annotation.HttpReq"></property>
-        <property name="httpClientBeanName" value="httpClientRmi"></property>
+        <property name="httpClientManagerBeanName" value="httpClientManager"></property>
         <property name="propertiesResolverName" value="propertiesResolver"></property>
     </bean>
 
-    <bean id="httpClientRmi" class="httpClient.HttpClientRmi"></bean>
+
+    <!--default http client manager-->
+    <!--<bean id="httpClientManager" class="httpClient.client.DefaultHttpClientManager" init-method="init" destroy-method="destroy"></bean>-->
+
+    <!--custom http client manager-->
+    <bean id="httpClientManager" class="httpClient.client.CustomHttpClientManager" init-method="init" destroy-method="destroy"></bean>
+
+
     <bean id="propertiesResolver" class="spring.PropertiesResolver"></bean>
 
     <!--第二种实现方式-->

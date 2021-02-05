@@ -4,7 +4,7 @@ package httpClient.factory.reqeustBuilder;
 import httpClient.constants.HttpMethod;
 import httpClient.request.HttpRequestConfig;
 import httpClient.request.HttpRequestConfigAdapter;
-import httpClient.request.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestCustomConfig;
 import org.apache.commons.lang3.StringUtils;
 import spring.PropertiesResolver;
 
@@ -13,7 +13,7 @@ import spring.PropertiesResolver;
  */
 public class HttpReqesutBuilderStaticFactory {
 
-    public static HttpRequestBuilder createHttpRequestBuilder(HttpRequestCustomerConfig httpRequestCustomerConfig,
+    public static HttpRequestBuilder createHttpRequestBuilder(HttpRequestCustomConfig httpRequestCustomerConfig,
                                                               PropertiesResolver propertiesResolver) {
 
         HttpRequestConfig httpRequestConfig = new HttpRequestConfigAdapter(httpRequestCustomerConfig, propertiesResolver);

@@ -19,7 +19,7 @@ public class ClassPathHttpToolScanner extends ClassPathBeanDefinitionScanner {
 
     private Class<? extends Annotation> annotationClass;
     private Class<?> markerInterface;
-    private String httpClientBeanName;
+    private String httpClientManagerBeanName;
     private String propertiesResolverName;
 
     public ClassPathHttpToolScanner(BeanDefinitionRegistry registry, boolean useDefaultFilters) {
@@ -34,8 +34,8 @@ public class ClassPathHttpToolScanner extends ClassPathBeanDefinitionScanner {
         this.markerInterface = markerInterface;
     }
 
-    public void setHttpClientBeanName(String httpClientBeanName) {
-        this.httpClientBeanName = httpClientBeanName;
+    public void setHttpClientManagerBeanName(String httpClientManagerBeanName) {
+        this.httpClientManagerBeanName = httpClientManagerBeanName;
     }
 
     public void setPropertiesResolverName(String propertiesResolverName) {
@@ -71,7 +71,7 @@ public class ClassPathHttpToolScanner extends ClassPathBeanDefinitionScanner {
             GenericBeanDefinition beanDefinition = (GenericBeanDefinition) definitionHolder.getBeanDefinition();
             MutablePropertyValues mutablePropertyValues = beanDefinition.getPropertyValues();
             mutablePropertyValues.addPropertyValue("httpToolInterface", beanDefinition.getBeanClassName());
-            mutablePropertyValues.addPropertyValue("httpClient", new RuntimeBeanReference(httpClientBeanName));
+            mutablePropertyValues.addPropertyValue("httpClientManager", new RuntimeBeanReference(httpClientManagerBeanName));
             mutablePropertyValues.addPropertyValue("propertiesResolver", new RuntimeBeanReference(propertiesResolverName));
             // 实际初始化的是一个工厂类，调用该工厂类的 getObject 方法，利用 JDK 动态代理生成一个代理对象
             beanDefinition.setBeanClass(HttpToolFactoryBean.class);

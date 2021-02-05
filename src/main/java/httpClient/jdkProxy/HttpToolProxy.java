@@ -1,12 +1,13 @@
-package httpClient.proxy;
+package httpClient.jdkProxy;
 
+import httpClient.client.HttpClientManager;
 import httpClient.response.HttpResoponseHandler;
 import httpClient.factory.reqeustBuilder.HttpReqesutBuilderStaticFactory;
 import httpClient.factory.reqeustBuilder.HttpRequestBuilder;
 import httpClient.request.HttpRequestConfig;
 import httpClient.request.HttpRequestConfigAdapter;
 import httpClient.request.HttpRequestConfigParser;
-import httpClient.request.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestCustomConfig;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -22,7 +23,7 @@ public class HttpToolProxy<T> implements InvocationHandler {
 
     private Class<T> httpToolInterface;
     // 默认的httpClient
-    private CloseableHttpClient httpClient;
+    private HttpClientManager httpClientManager;
     // resolve properties
     private PropertiesResolver propertiesResolver;
     // reponse handle
@@ -30,17 +31,17 @@ public class HttpToolProxy<T> implements InvocationHandler {
 
 
     public HttpToolProxy(Class<T> httpToolInterface,
-                         CloseableHttpClient httpClient,
+                         HttpClientManager httpClientManager,
                          PropertiesResolver propertiesResolver,
                          HttpResoponseHandler resoponseHandler) {
 
         Asserts.notNull(httpToolInterface, "httpToolInterface");
-        Asserts.notNull(httpClient, "httpClient");
+        Asserts.notNull(httpClientManager, "httpClientManager");
         Asserts.notNull(propertiesResolver, "propertiesResolver");
         Asserts.notNull(resoponseHandler, "resoponseHandler");
 
         this.httpToolInterface = httpToolInterface;
-        this.httpClient = httpClient;
+        this.httpClientManager = httpClientManager;
         this.propertiesResolver = propertiesResolver;
         this.resoponseHandler = resoponseHandler;
     }
@@ -48,11 +49,15 @@ public class HttpToolProxy<T> implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
-        HttpRequestCustomerConfig customerConfig = HttpRequestConfigParser.parse(httpToolInterface, method, args);
-        HttpRequestConfig httpRequestConfig = new HttpRequestConfigAdapter(customerConfig, propertiesResolver);
+        HttpRequestCustomConfig customConfig = HttpRequestConfigParser.parse(httpToolInterface, method, args);
+        HttpRequestConfig httpRequestConfig = new HttpRequestConfigAdapter(customConfig, propertiesResolver);
         HttpRequestBuilder requestBuilder = HttpReqesutBuilderStaticFactory.createHttpRequestBuilder(httpRequestConfig);
         HttpRequestBase httpRequest = requestBuilder.build();
         HttpClientContext context = HttpClientContext.create();
+        CloseableHttpClient httpClient = httpClientManager.getHttpClient();
+        if(httpClient == null) {
+            throw new RuntimeException("http client is null");
+        }
         HttpResponse httpResponse = null;
         try {
             Long startMillis = System.currentTimeMillis();

@@ -1,6 +1,6 @@
 package httpClient.annoParser;
 
-import httpClient.request.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestCustomConfig;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Parameter;
@@ -12,7 +12,7 @@ public class HttpReqBodyAnnoParser implements HttpToolParamAnnoParser {
     public void parse(Annotation annotation,
                       Parameter parameter,
                       Object arg,
-                      HttpRequestCustomerConfig httpRequestConfig) {
+                      HttpRequestCustomConfig httpRequestConfig) {
         if(arg == null) {
             return;
         }

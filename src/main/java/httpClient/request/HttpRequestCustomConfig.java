@@ -3,7 +3,7 @@ package httpClient.request;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HttpRequestCustomerConfig<T> {
+public class HttpRequestCustomConfig<T> {
 
     /**
      * http request method

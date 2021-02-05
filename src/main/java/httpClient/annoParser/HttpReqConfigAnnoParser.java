@@ -2,14 +2,14 @@ package httpClient.annoParser;
 
 
 import httpClient.annotation.HttpReqConfig;
-import httpClient.request.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestCustomConfig;
 
 import java.lang.annotation.Annotation;
 
 public class HttpReqConfigAnnoParser implements HttpToolAnnoParser {
 
     @Override
-    public void parse(Annotation annotation, HttpRequestCustomerConfig httpRequestConfig) {
+    public void parse(Annotation annotation, HttpRequestCustomConfig httpRequestConfig) {
         HttpReqConfig httpReqConfig = (HttpReqConfig) annotation;
 
         String httpMethod = httpReqConfig.httpMethod();

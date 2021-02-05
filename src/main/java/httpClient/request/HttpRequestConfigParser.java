@@ -47,11 +47,11 @@ public class HttpRequestConfigParser {
     }
 
 
-    public static HttpRequestCustomerConfig parse(Class httpToolInterface,
-                                                  Method method,
-                                                  Object[] args) {
+    public static HttpRequestCustomConfig parse(Class httpToolInterface,
+                                                Method method,
+                                                Object[] args) {
 
-        HttpRequestCustomerConfig httpRequestConfig = new HttpRequestCustomerConfig();
+        HttpRequestCustomConfig httpRequestConfig = new HttpRequestCustomConfig();
         // parse class/interface annotation
         parseInterfaceAnno(httpRequestConfig, httpToolInterface);
         // parse method annotation
@@ -68,7 +68,7 @@ public class HttpRequestConfigParser {
      * @param httpRequestConfig
      * @param httpToolInterface
      */
-    private static void parseInterfaceAnno(HttpRequestCustomerConfig httpRequestConfig,
+    private static void parseInterfaceAnno(HttpRequestCustomConfig httpRequestConfig,
                                            Class httpToolInterface) {
         parseAnnotation(httpRequestConfig, httpToolInterface.getAnnotations());
     }
@@ -79,13 +79,13 @@ public class HttpRequestConfigParser {
      * @param httpRequestConfig
      * @param method
      */
-    private static void parseMethodAnno(HttpRequestCustomerConfig httpRequestConfig,
+    private static void parseMethodAnno(HttpRequestCustomConfig httpRequestConfig,
                                         Method method) {
         parseAnnotation(httpRequestConfig, method.getAnnotations());
     }
 
 
-    private static void parseAnnotation(HttpRequestCustomerConfig httpRequestConfig, Annotation[] annotations) {
+    private static void parseAnnotation(HttpRequestCustomConfig httpRequestConfig, Annotation[] annotations) {
         if (ArrayUtils.isEmpty(annotations)) {
             return;
         }
@@ -107,7 +107,7 @@ public class HttpRequestConfigParser {
      * @param parameters
      * @param args
      */
-    private static void parseParamAnno(HttpRequestCustomerConfig httpRequestConfig,
+    private static void parseParamAnno(HttpRequestCustomConfig httpRequestConfig,
                                        Parameter[] parameters,
                                        Object[] args) {
         if (ArrayUtils.isEmpty(parameters)) {
@@ -123,7 +123,7 @@ public class HttpRequestConfigParser {
         }
     }
 
-    private static void parseParamAnno(HttpRequestCustomerConfig httpRequestConfig,
+    private static void parseParamAnno(HttpRequestCustomConfig httpRequestConfig,
                                        Parameter parameter,
                                        Object arg) {
         Annotation[] annotations = parameter.getAnnotations();

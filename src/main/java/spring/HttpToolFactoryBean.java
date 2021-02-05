@@ -1,7 +1,8 @@
 package spring;
 
+import httpClient.client.HttpClientManager;
 import httpClient.response.HttpResoponseHandler;
-import httpClient.proxy.HttpToolProxy;
+import httpClient.jdkProxy.HttpToolProxy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.springframework.beans.factory.FactoryBean;
 
@@ -10,7 +11,7 @@ import java.lang.reflect.Proxy;
 public class HttpToolFactoryBean<T> implements FactoryBean<T> {
 
     private Class<T> httpToolInterface;
-    private CloseableHttpClient httpClient;
+    private HttpClientManager httpClientManager;
     private PropertiesResolver propertiesResolver;
 
 
@@ -18,8 +19,8 @@ public class HttpToolFactoryBean<T> implements FactoryBean<T> {
         this.httpToolInterface = httpToolInterface;
     }
 
-    public void setHttpClient(CloseableHttpClient httpClient) {
-        this.httpClient = httpClient;
+    public void setHttpClientManager(HttpClientManager httpClientManager) {
+        this.httpClientManager = httpClientManager;
     }
 
     public void setPropertiesResolver(PropertiesResolver propertiesResolver) {
@@ -29,7 +30,7 @@ public class HttpToolFactoryBean<T> implements FactoryBean<T> {
     @Override
     public T getObject() throws Exception {
         HttpToolProxy httpToolProxy = new HttpToolProxy(httpToolInterface,
-                httpClient,
+                httpClientManager,
                 propertiesResolver,
                 HttpResoponseHandler.getInstance());
 

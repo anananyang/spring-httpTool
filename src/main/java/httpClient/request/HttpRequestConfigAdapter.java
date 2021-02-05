@@ -14,10 +14,10 @@ import java.util.Map;
 
 public class HttpRequestConfigAdapter implements HttpRequestConfig {
 
-    public HttpRequestCustomerConfig httpRequestConfig;
+    public HttpRequestCustomConfig httpRequestConfig;
     protected PropertiesResolver propertiesResolver;
 
-    public HttpRequestConfigAdapter(HttpRequestCustomerConfig httpRequestConfig,
+    public HttpRequestConfigAdapter(HttpRequestCustomConfig httpRequestConfig,
                                     PropertiesResolver propertiesResolver) {
 
         this.httpRequestConfig = httpRequestConfig;

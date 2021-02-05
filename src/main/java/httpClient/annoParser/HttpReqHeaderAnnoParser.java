@@ -1,7 +1,7 @@
 package httpClient.annoParser;
 
 import httpClient.annotation.HttpReqHeader;
-import httpClient.request.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestCustomConfig;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -12,7 +12,7 @@ import java.util.Map;
 public class HttpReqHeaderAnnoParser implements HttpToolAnnoParser, HttpToolParamAnnoParser{
 
     @Override
-    public void parse(Annotation annotation, HttpRequestCustomerConfig httpRequestConfig) {
+    public void parse(Annotation annotation, HttpRequestCustomConfig httpRequestConfig) {
         HttpReqHeader httpReqHeader = (HttpReqHeader) annotation;
 
         String haederName = httpReqHeader.name();
@@ -29,7 +29,7 @@ public class HttpReqHeaderAnnoParser implements HttpToolAnnoParser, HttpToolPara
     public void parse(Annotation annotation,
                       Parameter parameter,
                       Object arg,
-                      HttpRequestCustomerConfig httpRequestConfig) {
+                      HttpRequestCustomConfig httpRequestConfig) {
         HttpReqHeader httpReqHeader = (HttpReqHeader) annotation;
         if(arg instanceof Map)  {
             httpRequestConfig.addHeader((Map) arg);

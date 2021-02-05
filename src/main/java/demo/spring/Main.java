@@ -15,10 +15,10 @@ public class Main {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
 
 //
-//        HttpRequestGetTest httpRequestRmiTest = (HttpRequestGetTest)applicationContext.getBean("httpRequestGetTest");
-//        httpRequestRmiTest.getRemoteObj("index.html");
+        HttpRequestGetTest httpRequestRmiTest = (HttpRequestGetTest)applicationContext.getBean("httpRequestGetTest");
+        httpRequestRmiTest.getRemoteObj("index.html");
 
-//        System.out.println("\n\n\n");
+        System.out.println("\n\n\n");
 
 
         HttpReqeustPostTest httpRequestRmiTest2 = (HttpReqeustPostTest)applicationContext.getBean("httpReqeustPostTest");

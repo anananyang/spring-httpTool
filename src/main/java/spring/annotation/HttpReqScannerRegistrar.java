@@ -43,9 +43,9 @@ public class HttpReqScannerRegistrar implements ImportBeanDefinitionRegistrar, R
         if (!BeanNameGenerator.class.equals(nameGenerator)) {
             scanner.setBeanNameGenerator(BeanUtils.instantiateClass(nameGenerator));
         }
-        String httpClientBeanName = annoAttrs.getString("httpClientBeanName");
-        if (StringUtils.isNotBlank(httpClientBeanName)) {
-            scanner.setHttpClientBeanName(httpClientBeanName);
+        String httpClientManagerBeanName = annoAttrs.getString("httpClientManagerBeanName");
+        if (StringUtils.isNotBlank(httpClientManagerBeanName)) {
+            scanner.setHttpClientManagerBeanName(httpClientManagerBeanName);
         }
 
         String propertiesResolverName = annoAttrs.getString("propertiesResolverName");

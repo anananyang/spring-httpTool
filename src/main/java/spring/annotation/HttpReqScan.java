@@ -19,7 +19,7 @@ public @interface HttpReqScan {
 
     Class<? extends BeanNameGenerator> nameGenerator() default BeanNameGenerator.class;
 
-    String httpClientBeanName();
+    String httpClientManagerBeanName();
 
     String propertiesResolverName();
 

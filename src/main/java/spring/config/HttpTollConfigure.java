@@ -7,7 +7,7 @@ import spring.annotation.HttpReqScan;
 @Configuration
 @HttpReqScan(value = {"demo.spring"},
              annotationClass = HttpReq.class,
-             httpClientBeanName = "httpClientRmi",
+             httpClientManagerBeanName = "httpClientManager",
              propertiesResolverName = "propertiesResolverName")
 public class HttpTollConfigure {
 }

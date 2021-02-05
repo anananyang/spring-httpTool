@@ -1,7 +1,7 @@
 package httpClient.annoParser;
 
 import httpClient.annotation.HttpReqHeader;
-import httpClient.request.HttpRequestCustomerConfig;
+import httpClient.request.HttpRequestCustomConfig;
 import httpClient.annotation.HttpReqParam;
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,7 +23,7 @@ public class HttpReqParamAnnoParser implements HttpToolParamAnnoParser {
     public void parse(Annotation annotation,
                       Parameter parameter,
                       Object arg,
-                      HttpRequestCustomerConfig httpRequestConfig) {
+                      HttpRequestCustomConfig httpRequestConfig) {
         HttpReqParam httpReqParam = (HttpReqParam) annotation;
         HttpReqHeader httpReqHeader = (HttpReqHeader) annotation;
         if (arg instanceof Map) {
