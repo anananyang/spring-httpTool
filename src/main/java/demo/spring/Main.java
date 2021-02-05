@@ -6,6 +6,9 @@ import demo.spring.rmi.HttpRequestGetTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -22,6 +25,11 @@ public class Main {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("mobilephone", "13611111111");
         jsonObject.put("password", "123456");
-        httpRequestRmiTest2.getRemoteObj(jsonObject);
+
+        Map<String, String> header = new HashMap() {{
+            put("name", "anyang");
+//            put("appName", "anyang");
+        }};
+        httpRequestRmiTest2.getRemoteObj(jsonObject, header);
     }
 }

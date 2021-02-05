@@ -6,8 +6,10 @@ import org.apache.commons.lang3.StringUtils;
 
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Parameter;
+import java.util.Map;
 
-public class HttpReqHeaderAnnoParser implements HttpToolAnnoParser{
+public class HttpReqHeaderAnnoParser implements HttpToolAnnoParser, HttpToolParamAnnoParser{
 
     @Override
     public void parse(Annotation annotation, HttpRequestCustomerConfig httpRequestConfig) {
@@ -20,5 +22,21 @@ public class HttpReqHeaderAnnoParser implements HttpToolAnnoParser{
         }
 
         httpRequestConfig.addHeader(haederName, headerValue);
+    }
+
+
+    @Override
+    public void parse(Annotation annotation,
+                      Parameter parameter,
+                      Object arg,
+                      HttpRequestCustomerConfig httpRequestConfig) {
+        HttpReqHeader httpReqHeader = (HttpReqHeader) annotation;
+        if(arg instanceof Map)  {
+            httpRequestConfig.addHeader((Map) arg);
+        } else {
+            String haederName = httpReqHeader.name();
+            String headerValue = arg == null ? null : arg.toString();
+            httpRequestConfig.addHeader(haederName, headerValue);
+        }
     }
 }

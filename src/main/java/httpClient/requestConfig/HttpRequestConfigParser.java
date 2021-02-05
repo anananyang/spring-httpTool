@@ -26,13 +26,24 @@ public class HttpRequestConfigParser {
      * 注册默认的注解解析器
      */
     static {
-        annoParserMap.put(HttpReq.class.getSimpleName(), new HttpReqAnnoParser());
-        annoParserMap.put(HttpReqConfig.class.getSimpleName(), new HttpReqConfigAnnoParser());
-        annoParserMap.put(HttpReqHeader.class.getSimpleName(), new HttpReqHeaderAnnoParser());
 
-        paramAnnoParserMap.put(HttpReqBody.class.getSimpleName(), new HttpReqBodyAnnoParser());
-        paramAnnoParserMap.put(HttpReqParam.class.getSimpleName(), new HttpReqParamAnnoParser());
-        paramAnnoParserMap.put(PathVariable.class.getSimpleName(), new PathVariableAnnoParser());
+        HttpReqAnnoParser httpReqAnnoParser = new HttpReqAnnoParser();
+        HttpReqConfigAnnoParser httpReqConfigAnnoParser = new HttpReqConfigAnnoParser();
+        HttpReqHeaderAnnoParser httpReqHeaderAnnoParser = new HttpReqHeaderAnnoParser();
+
+        annoParserMap.put(HttpReq.class.getSimpleName(), httpReqAnnoParser);
+        annoParserMap.put(HttpReqConfig.class.getSimpleName(), httpReqConfigAnnoParser);
+        annoParserMap.put(HttpReqHeader.class.getSimpleName(), httpReqHeaderAnnoParser);
+
+
+        HttpReqBodyAnnoParser httpReqBodyAnnoParser = new HttpReqBodyAnnoParser();
+        HttpReqParamAnnoParser httpReqParamAnnoParser = new HttpReqParamAnnoParser();
+        PathVariableAnnoParser pathVariableAnnoParser = new PathVariableAnnoParser();
+
+        paramAnnoParserMap.put(HttpReqBody.class.getSimpleName(), httpReqBodyAnnoParser);
+        paramAnnoParserMap.put(HttpReqParam.class.getSimpleName(), httpReqParamAnnoParser);
+        paramAnnoParserMap.put(PathVariable.class.getSimpleName(), pathVariableAnnoParser);
+        paramAnnoParserMap.put(HttpReqHeader.class.getSimpleName(), httpReqHeaderAnnoParser);
     }
 
 

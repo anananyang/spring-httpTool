@@ -1,11 +1,13 @@
 package httpClient.annoParser;
 
+import httpClient.annotation.HttpReqHeader;
 import httpClient.requestConfig.HttpRequestCustomerConfig;
 import httpClient.annotation.HttpReqParam;
 import org.apache.commons.lang3.StringUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Parameter;
+import java.util.Map;
 
 public class HttpReqParamAnnoParser implements HttpToolParamAnnoParser {
 
@@ -23,12 +25,19 @@ public class HttpReqParamAnnoParser implements HttpToolParamAnnoParser {
                       Object arg,
                       HttpRequestCustomerConfig httpRequestConfig) {
         HttpReqParam httpReqParam = (HttpReqParam) annotation;
-        String paramName = httpReqParam != null ? httpReqParam.value() : null;
-        if(StringUtils.isBlank(paramName)) {
-            // TODO 日志打印 paramKey is empty
-            return;
+        HttpReqHeader httpReqHeader = (HttpReqHeader) annotation;
+        if (arg instanceof Map) {
+            httpRequestConfig.addParam((Map) arg);
+        } else {
+            String paramName = httpReqParam != null ? httpReqParam.value() : null;
+            if (StringUtils.isBlank(paramName)) {
+                // TODO 日志打印 paramKey is empty
+                return;
+            }
+            String paramValue = arg == null ? null : arg.toString();
+            httpRequestConfig.addParam(paramName, paramValue);
         }
-        String paramValue = arg == null ? null : arg.toString();
-        httpRequestConfig.addParam(paramName, paramValue);
+
+
     }
 }

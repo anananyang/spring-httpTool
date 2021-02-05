@@ -52,6 +52,7 @@ public class HttpRequestConfigAdapter implements HttpRequestConfig {
             String headerName = (String) entry.getKey();
             String headerValue = propertiesResolver.resolveStringValue((String) entry.getValue());
             headers[index] = new BasicHeader(headerName, headerValue);
+            index++;
         }
 
         return headers;

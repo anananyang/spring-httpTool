@@ -1,5 +1,7 @@
 package httpClient.requestConfig;
 
+import com.sun.corba.se.spi.ior.ObjectKey;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,12 +62,46 @@ public class HttpRequestCustomerConfig<T> {
         headerMap.put(name, value);
     }
 
+    public void addHeader(Map<String, Object> map) {
+        if (map == null || map.isEmpty()) {
+            return;
+        }
+        if (headerMap == null) {
+            headerMap = new HashMap<>();
+        }
+
+        for (Map.Entry entry : map.entrySet()) {
+            String key = (String) entry.getKey();
+            Object value = (Object) entry.getValue();
+            headerMap.put(key, value instanceof String ? (String) value : value.toString());
+        }
+
+    }
+
     public void addParam(String name, String value) {
         if (paramMap == null) {
             paramMap = new HashMap<>();
         }
         paramMap.put(name, value);
     }
+
+    public void addParam(Map<String, Object> map) {
+        if (map == null || map.isEmpty()) {
+            return;
+        }
+        if (paramMap == null) {
+            paramMap = new HashMap<>();
+        }
+
+        for (Map.Entry entry : map.entrySet()) {
+            String key = (String) entry.getKey();
+            Object value = (Object) entry.getValue();
+            paramMap.put(key, value instanceof String ? (String) value : value.toString());
+        }
+
+    }
+
+
 
     public void addPathVaribale(String name, String value) {
         if (pathVariableMap == null) {
