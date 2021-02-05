@@ -6,38 +6,41 @@ import org.apache.http.impl.client.HttpClients;
 
 public class CustomHttpClientManager extends HttpClientManager {
 
-    private Integer timeout = 20 * 1000;
-    private Integer connectionTimeout = 10 * 1000;
-    private Integer retryCount = 1;
+    private HttpClientConfig httpClientConfig;
 
-
-    public void setTimeout(Integer timeout) {
-        this.timeout = timeout;
-    }
-
-    public void setConnectionTimeout(Integer connectionTimeout) {
-        this.connectionTimeout = connectionTimeout;
-    }
-
-    public void setRetryCount(Integer retryCount) {
-        this.retryCount = retryCount;
+    public void setHttpClientConfig(HttpClientConfig httpClientConfig) {
+        this.httpClientConfig = httpClientConfig;
     }
 
     @Override
     public void init() {
-        RequestConfig requestConfig = RequestConfig.custom()
-                .setSocketTimeout(timeout)
-                .setConnectTimeout(connectionTimeout)
+        CloseableHttpClient httpClient = HttpClients.custom()
+                .setDefaultRequestConfig(this.createDefaultReqeustConfig())
                 .build();
 
         // retry
 
+        // credentialsProvider
 
-        CloseableHttpClient httpClient = HttpClients.custom()
-                .setDefaultRequestConfig(requestConfig)
-                .build();
+        // globe proxy
+
+        // connect pool manager
+
+
+        // globe request and response interceptor
 
 
         this.httpClient = httpClient;
     }
+
+    private RequestConfig createDefaultReqeustConfig() {
+        if(httpClientConfig == null) {
+            return null;
+        }
+        return RequestConfig.custom()
+                .setSocketTimeout(httpClientConfig.getTimeout())
+                .setConnectTimeout(httpClientConfig.getConnectionTimeout())
+                .build();
+    }
+
 }
