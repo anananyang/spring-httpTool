@@ -4,6 +4,7 @@ target
 target/*
 */target/*
 *.properties
+application.properties
 .idea
 .git
 *.iml
