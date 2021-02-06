@@ -1,0 +1,14 @@
+*~
+target
+/target
+target/*
+*/target/**
+*.properties
+.idea
+.git
+*.iml
+*.eml
+*.log
+.project
+.settings
+.classpath

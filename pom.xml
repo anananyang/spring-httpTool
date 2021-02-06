@@ -13,7 +13,24 @@
         <maven.compiler.target>8</maven.compiler.target>
         <httpclient-version>4.5.13</httpclient-version>
         <spring-version>4.1.6.RELEASE</spring-version>
+        <fast-json-version>1.2.73</fast-json-version>
     </properties>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <!--动态代理获取参数名，java8 及以上支持-->
+                    <compilerArgument>-parameters</compilerArgument>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
 
@@ -43,6 +60,13 @@
             <version>${spring-version}</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fast-json-version}</version>
+        </dependency>
 
     </dependencies>
 

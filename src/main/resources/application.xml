@@ -6,15 +6,36 @@
 
     <!--启用 spring 注解-->
     <context:annotation-config />
-    <!--<context:component-scan base-package="demo.spring"/>-->
+    <context:component-scan base-package="demo.spring"/>
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:application.properties"/>
 
     <!--第一种实现方式-->
     <bean id="httpToolScannerConfigure" class="spring.HttpToolScannerConfigure">
         <property name="basePackage" value="demo.spring.rmi"></property>
-        <property name="annotationClass" value="annotation.HttpReq"></property>
+        <property name="annotationClass" value="httpClient.annotation.HttpReq"></property>
+        <property name="httpClientManagerBeanName" value="httpClientManager"></property>
+        <property name="propertiesResolverName" value="propertiesResolver"></property>
     </bean>
 
+
+    <!--default http client manager-->
+    <!--<bean id="httpClientManager" class="httpClient.client.DefaultHttpClientManager" init-method="init" destroy-method="destroy"></bean>-->
+
+    <!--custom http client manager-->
+    <bean id="httpClientManager" class="httpClient.client.CustomHttpClientManager" init-method="init" destroy-method="destroy">
+        <property name="httpClientConfig" ref="httpClientConfig"></property>
+    </bean>
+
+    <bean id="httpClientConfig" class="httpClient.client.HttpClientConfig">
+        <property name="timeout" value="20000"></property>
+        <property name="connectionTimeout" value="10000"></property>
+        <property name="retryCount" value="1"></property>
+    </bean>
+
+
+    <bean id="propertiesResolver" class="spring.PropertiesResolver"></bean>
+
     <!--第二种实现方式-->
-    <!--<bean id="httpTollConfigure" class="config.HttpTollConfigure"/>-->
+    <!--<bean id="httpTollConfigure" class="request.HttpTollConfigure"/>-->
 
 </beans>

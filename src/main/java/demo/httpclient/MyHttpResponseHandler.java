@@ -1,5 +1,6 @@
 package demo.httpclient;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -17,6 +18,12 @@ public class MyHttpResponseHandler implements ResponseHandler {
         if (statusLine.getStatusCode() > 300) {
             throw new RuntimeException("http response exception: " + statusLine.getStatusCode());
         }
+
+        Header header = httpResponse.getFirstHeader("Content-Type");
+        if(header.getValue().equals("application/json")) {
+            System.out.println("json");
+        }
+
         HttpEntity entity = httpResponse.getEntity();
         return EntityUtils.toString(entity, "UTF-8");
     }

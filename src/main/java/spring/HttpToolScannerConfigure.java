@@ -19,6 +19,23 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
     private Class<?> markerInterface;
     private ApplicationContext applicationContext;    // 作为默认的 classloader
     private BeanNameGenerator nameGenerator;          // 名字生成器
+//    private StringValueResolver embeddedValueResolver;  // properties 解析
+    private String httpClientManagerBeanName;
+    private String propertiesResolverName;
+//
+//    @Override
+//    public void setEmbeddedValueResolver(StringValueResolver resolver) {
+//        this.embeddedValueResolver = resolver;
+//    }
+
+
+    public void setHttpClientManagerBeanName(String httpClientManagerBeanName) {
+        this.httpClientManagerBeanName = httpClientManagerBeanName;
+    }
+
+    public void setPropertiesResolverName(String propertiesResolverName) {
+        this.propertiesResolverName = propertiesResolverName;
+    }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
@@ -42,7 +59,8 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
     }
 
     @Override
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {}
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+    }
 
     /**
      * 配置自定义扫描器，对指定路径下的资源进行扫描
@@ -57,6 +75,9 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
         scanner.setMarkerInterface(this.markerInterface);
         scanner.setResourceLoader(this.applicationContext);
         scanner.setBeanNameGenerator(this.nameGenerator);
+        scanner.setHttpClientManagerBeanName(this.httpClientManagerBeanName);
+        scanner.setPropertiesResolverName(this.propertiesResolverName);
+//        scanner.setEmbeddedValueResolver(this.embeddedValueResolver);
         scanner.registerFilters();  // 在这里注册需要扫描出来的注解
         // 开始扫描
         scanner.scan(StringUtils.tokenizeToStringArray(this.basePackage, ",; \t\n"));
