@@ -6,7 +6,6 @@
 
     <!--启用 spring 注解-->
     <context:annotation-config />
-    <context:component-scan base-package="demo.spring"/>
     <context:property-placeholder ignore-unresolvable="true" location="classpath:application.properties"/>
 
     <!--第一种实现方式-->
