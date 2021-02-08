@@ -1,4 +1,4 @@
-package spring.config;
+package demo.spring.config;
 
 import httpClient.annotation.HttpReq;
 import org.springframework.context.annotation.Configuration;
