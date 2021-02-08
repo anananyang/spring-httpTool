@@ -8,6 +8,8 @@ import spring.annotation.HttpReqScan;
 @HttpReqScan(value = {"demo.spring"},
              annotationClass = HttpReq.class,
              httpClientManagerBeanName = "httpClientManager",
-             propertiesResolverName = "propertiesResolverName")
+             propertiesResolverName = "propertiesResolverName",
+             proxyRuleName = "proxyName"
+)
 public class HttpTollConfigure {
 }

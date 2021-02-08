@@ -12,7 +12,7 @@ public abstract class HttpClientManager {
     /**
      * depend on spring bean init-method
      */
-    public abstract void init();
+    public abstract void init() throws Throwable;
 
     public CloseableHttpClient getHttpClient() {
         return httpClient;

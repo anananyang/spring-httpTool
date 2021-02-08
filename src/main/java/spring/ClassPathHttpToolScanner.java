@@ -1,5 +1,6 @@
 package spring;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -21,6 +22,8 @@ public class ClassPathHttpToolScanner extends ClassPathBeanDefinitionScanner {
     private Class<?> markerInterface;
     private String httpClientManagerBeanName;
     private String propertiesResolverName;
+    private String proxyRuleName;
+
 
     public ClassPathHttpToolScanner(BeanDefinitionRegistry registry, boolean useDefaultFilters) {
         super(registry, useDefaultFilters);
@@ -40,6 +43,10 @@ public class ClassPathHttpToolScanner extends ClassPathBeanDefinitionScanner {
 
     public void setPropertiesResolverName(String propertiesResolverName) {
         this.propertiesResolverName = propertiesResolverName;
+    }
+
+    public void setProxyRuleName(String proxyRuleName) {
+        this.proxyRuleName = proxyRuleName;
     }
 
     public void registerFilters() {
@@ -73,6 +80,9 @@ public class ClassPathHttpToolScanner extends ClassPathBeanDefinitionScanner {
             mutablePropertyValues.addPropertyValue("httpToolInterface", beanDefinition.getBeanClassName());
             mutablePropertyValues.addPropertyValue("httpClientManager", new RuntimeBeanReference(httpClientManagerBeanName));
             mutablePropertyValues.addPropertyValue("propertiesResolver", new RuntimeBeanReference(propertiesResolverName));
+            if (StringUtils.isNotBlank(proxyRuleName)) {
+                mutablePropertyValues.addPropertyValue("proxyRule", new RuntimeBeanReference(proxyRuleName));
+            }
             // 实际初始化的是一个工厂类，调用该工厂类的 getObject 方法，利用 JDK 动态代理生成一个代理对象
             beanDefinition.setBeanClass(HttpToolFactoryBean.class);
             beanDefinition.setAutowireMode(AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE);

@@ -30,10 +30,12 @@ public class HttpRequestConfigParser {
         HttpReqAnnoParser httpReqAnnoParser = new HttpReqAnnoParser();
         HttpReqConfigAnnoParser httpReqConfigAnnoParser = new HttpReqConfigAnnoParser();
         HttpReqHeaderAnnoParser httpReqHeaderAnnoParser = new HttpReqHeaderAnnoParser();
+        HttpReqProxyAnnoParser httpReqProxyAnnoParser = new HttpReqProxyAnnoParser();
 
         annoParserMap.put(HttpReq.class.getSimpleName(), httpReqAnnoParser);
         annoParserMap.put(HttpReqConfig.class.getSimpleName(), httpReqConfigAnnoParser);
         annoParserMap.put(HttpReqHeader.class.getSimpleName(), httpReqHeaderAnnoParser);
+        annoParserMap.put(HttpReqProxy.class.getSimpleName(), httpReqProxyAnnoParser);
 
 
         HttpReqBodyAnnoParser httpReqBodyAnnoParser = new HttpReqBodyAnnoParser();

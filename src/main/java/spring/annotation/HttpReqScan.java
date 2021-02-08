@@ -23,4 +23,6 @@ public @interface HttpReqScan {
 
     String propertiesResolverName();
 
+    String proxyRuleName();
+
 }

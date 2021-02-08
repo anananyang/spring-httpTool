@@ -5,6 +5,9 @@ public class HttpClientConfig {
     private Integer timeout = 20 * 1000;
     private Integer connectionTimeout = 10 * 1000;
     private Integer retryCount = 1;
+    // manage connection pool
+    private Integer totalMaxConnetions = 200;
+    private Integer defaultMaxPerRoute = 20;
 
 
     public Integer getTimeout() {
@@ -29,5 +32,21 @@ public class HttpClientConfig {
 
     public void setRetryCount(Integer retryCount) {
         this.retryCount = retryCount;
+    }
+
+    public Integer getTotalMaxConnetions() {
+        return totalMaxConnetions;
+    }
+
+    public void setTotalMaxConnetions(Integer totalMaxConnetions) {
+        this.totalMaxConnetions = totalMaxConnetions;
+    }
+
+    public Integer getDefaultMaxPerRoute() {
+        return defaultMaxPerRoute;
+    }
+
+    public void setDefaultMaxPerRoute(Integer defaultMaxPerRoute) {
+        this.defaultMaxPerRoute = defaultMaxPerRoute;
     }
 }

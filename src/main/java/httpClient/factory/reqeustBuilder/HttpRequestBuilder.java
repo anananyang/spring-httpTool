@@ -51,10 +51,12 @@ public abstract class HttpRequestBuilder {
         /**
          * add more request request
          */
-        RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectTimeout(httpRequestConfig.getConnectTimeout())
-                .setSocketTimeout(httpRequestConfig.getSocketTimeout())
-                .build();
+        RequestConfig.Builder builder = RequestConfig.custom();
+        builder.setConnectTimeout(httpRequestConfig.getConnectTimeout());
+        builder.setSocketTimeout(httpRequestConfig.getSocketTimeout());
+        builder.setProxy(httpRequestConfig.getHttpProxy());
+
+        RequestConfig requestConfig = builder.build();
 
         return requestConfig;
     }

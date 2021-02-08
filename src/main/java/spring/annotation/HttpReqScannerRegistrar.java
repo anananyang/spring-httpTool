@@ -47,12 +47,14 @@ public class HttpReqScannerRegistrar implements ImportBeanDefinitionRegistrar, R
         if (StringUtils.isNotBlank(httpClientManagerBeanName)) {
             scanner.setHttpClientManagerBeanName(httpClientManagerBeanName);
         }
-
         String propertiesResolverName = annoAttrs.getString("propertiesResolverName");
         if (StringUtils.isNotBlank(propertiesResolverName)) {
             scanner.setPropertiesResolverName(propertiesResolverName);
         }
-
+        String proxyRuleName = annoAttrs.getString("proxyRuleName");
+        if (StringUtils.isNotBlank(proxyRuleName)) {
+            scanner.setProxyRuleName(proxyRuleName);
+        }
         scanner.setResourceLoader(this.resourceLoader);
         scanner.registerFilters();  // 在这里注册需要扫描出来的注解
         scanner.scan(annoAttrs.getStringArray("value"));

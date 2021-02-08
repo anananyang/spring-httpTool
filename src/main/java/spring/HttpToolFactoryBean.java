@@ -1,9 +1,9 @@
 package spring;
 
 import httpClient.client.HttpClientManager;
+import httpClient.connection.SocksProxyRule;
 import httpClient.response.HttpResoponseHandler;
 import httpClient.jdkProxy.HttpToolProxy;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.springframework.beans.factory.FactoryBean;
 
 import java.lang.reflect.Proxy;
@@ -13,6 +13,7 @@ public class HttpToolFactoryBean<T> implements FactoryBean<T> {
     private Class<T> httpToolInterface;
     private HttpClientManager httpClientManager;
     private PropertiesResolver propertiesResolver;
+    private SocksProxyRule proxyRule;
 
 
     public void setHttpToolInterface(Class<T> httpToolInterface) {
@@ -27,12 +28,17 @@ public class HttpToolFactoryBean<T> implements FactoryBean<T> {
         this.propertiesResolver = propertiesResolver;
     }
 
+    public void setProxyRule(SocksProxyRule proxyRule) {
+        this.proxyRule = proxyRule;
+    }
+
     @Override
     public T getObject() throws Exception {
         HttpToolProxy httpToolProxy = new HttpToolProxy(httpToolInterface,
                 httpClientManager,
                 propertiesResolver,
-                HttpResoponseHandler.getInstance());
+                HttpResoponseHandler.getInstance(),
+                proxyRule);
 
         return (T) Proxy.newProxyInstance(httpToolInterface.getClassLoader(),
                 new Class[]{httpToolInterface},

@@ -24,6 +24,10 @@ public class HttpRequestCustomConfig<T> {
     private Map<String, String> paramMap;
     private Map<String, String> pathVariableMap;
 
+    private Boolean useHttpProxy = false;
+    private String httpProxyHost;
+    private String httpProxyPort;
+
 
     public void setHttpMethod(String httpMethod) {
         this.httpMethod = httpMethod;
@@ -51,6 +55,18 @@ public class HttpRequestCustomConfig<T> {
 
     public void setSocketTimeout(Integer socketTimeout) {
         this.socketTimeout = socketTimeout;
+    }
+
+    public void setUseHttpProxy(Boolean useHttpProxy) {
+        this.useHttpProxy = useHttpProxy;
+    }
+
+    public void setHttpProxyHost(String httpProxyHost) {
+        this.httpProxyHost = httpProxyHost;
+    }
+
+    public void setHttpProxyPort(String httpProxyPort) {
+        this.httpProxyPort = httpProxyPort;
     }
 
     public void addHeader(String name, String value) {
@@ -146,5 +162,17 @@ public class HttpRequestCustomConfig<T> {
 
     public Map<String, String> getPathVariableMap() {
         return pathVariableMap;
+    }
+
+    public Boolean getUseHttpProxy() {
+        return useHttpProxy;
+    }
+
+    public String getHttpProxyHost() {
+        return httpProxyHost;
+    }
+
+    public String getHttpProxyPort() {
+        return httpProxyPort;
     }
 }

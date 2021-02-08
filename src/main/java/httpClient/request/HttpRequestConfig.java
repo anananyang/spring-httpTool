@@ -1,6 +1,7 @@
 package httpClient.request;
 
 import org.apache.http.Header;
+import org.apache.http.HttpHost;
 import org.apache.http.NameValuePair;
 
 import java.util.List;
@@ -33,4 +34,6 @@ public interface HttpRequestConfig {
     Header[] getHeaders();
 
     List<NameValuePair> getParameters();
+
+    HttpHost getHttpProxy();
 }

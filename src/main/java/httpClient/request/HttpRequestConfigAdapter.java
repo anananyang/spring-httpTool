@@ -2,6 +2,7 @@ package httpClient.request;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
+import org.apache.http.HttpHost;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.message.BasicHeader;
@@ -163,5 +164,21 @@ public class HttpRequestConfigAdapter implements HttpRequestConfig {
     @Override
     public Map<String, String> getPathVariableMap() {
         return httpRequestConfig.getPathVariableMap();
+    }
+
+
+    @Override
+    public HttpHost getHttpProxy() {
+        if (!httpRequestConfig.getUseHttpProxy()) {
+            return null;
+        }
+        String port = propertiesResolver.resolveStringValue(httpRequestConfig.getHttpProxyPort());
+        String host = propertiesResolver.resolveStringValue(httpRequestConfig.getHttpProxyHost());
+        if(StringUtils.isBlank(port) || StringUtils.isBlank(host)) {
+            return null;
+        }
+
+        HttpHost httpHost = new HttpHost(host, Integer.valueOf(port), "http");
+        return httpHost;
     }
 }

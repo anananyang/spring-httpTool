@@ -27,7 +27,7 @@ public class Main {
                     .setRedirectStrategy(new LaxRedirectStrategy())  // 重定向处理
                     .build();
             MyHttpResponseHandler responseHandler = new MyHttpResponseHandler();
-            httpGet(client, responseHandler);
+//            httpGet(client, responseHandler);
             httpPost(client, responseHandler);
         } catch (Exception e) {
             System.out.println(e);
@@ -64,14 +64,19 @@ public class Main {
         String jsonStr = "{\"mobilephone\":\"13611111111\",\"password\":\"123456\"}";
         try {
             // 自定义代理
-//            HttpHost httpHost = new HttpHost("58.220.95.30", 10174, "http");
-//            RequestConfig customCofnig = RequestConfig.custom().setProxy(httpHost).build();
-//            httpPost.setConfig(customCofnig);
+            HttpHost httpHost = new HttpHost("101.205.120.102", 80, "http");
+            RequestConfig customCofnig = RequestConfig.custom().setProxy(httpHost).build();
+            httpPost.setConfig(customCofnig);
             StringEntity stringEntity = new StringEntity(jsonStr);
             httpPost.setEntity(stringEntity);
             httpPost.setHeader("Content-Type", "application/json");
             System.out.println("httpPost reqeust: " + httpPost.toString());
+            Long startMillis = System.currentTimeMillis();
             String str = (String) client.execute(httpPost, responseHandler);
+            Long endMillis = System.currentTimeMillis();
+
+            System.out.println("total time: " + (endMillis - startMillis) + "ms");
+
             System.out.println(str);
         }catch (Exception e) {
             System.out.println(e);

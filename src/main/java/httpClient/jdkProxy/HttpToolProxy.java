@@ -1,6 +1,8 @@
 package httpClient.jdkProxy;
 
 import httpClient.client.HttpClientManager;
+import httpClient.connection.SocksProxyHttpContext;
+import httpClient.connection.SocksProxyRule;
 import httpClient.response.HttpResoponseHandler;
 import httpClient.factory.reqeustBuilder.HttpReqesutBuilderStaticFactory;
 import httpClient.factory.reqeustBuilder.HttpRequestBuilder;
@@ -12,11 +14,13 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.Asserts;
 import spring.PropertiesResolver;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.net.URI;
 
 
 public class HttpToolProxy<T> implements InvocationHandler {
@@ -29,11 +33,13 @@ public class HttpToolProxy<T> implements InvocationHandler {
     // reponse handle
     private HttpResoponseHandler resoponseHandler;
 
+    private SocksProxyRule proxyRule;
 
     public HttpToolProxy(Class<T> httpToolInterface,
                          HttpClientManager httpClientManager,
                          PropertiesResolver propertiesResolver,
-                         HttpResoponseHandler resoponseHandler) {
+                         HttpResoponseHandler resoponseHandler,
+                         SocksProxyRule proxyRule) {
 
         Asserts.notNull(httpToolInterface, "httpToolInterface");
         Asserts.notNull(httpClientManager, "httpClientManager");
@@ -44,6 +50,7 @@ public class HttpToolProxy<T> implements InvocationHandler {
         this.httpClientManager = httpClientManager;
         this.propertiesResolver = propertiesResolver;
         this.resoponseHandler = resoponseHandler;
+        this.proxyRule = proxyRule;
     }
 
     @Override
@@ -53,9 +60,12 @@ public class HttpToolProxy<T> implements InvocationHandler {
         HttpRequestConfig httpRequestConfig = new HttpRequestConfigAdapter(customConfig, propertiesResolver);
         HttpRequestBuilder requestBuilder = HttpReqesutBuilderStaticFactory.createHttpRequestBuilder(httpRequestConfig);
         HttpRequestBase httpRequest = requestBuilder.build();
-        HttpClientContext context = HttpClientContext.create();
+        HttpContext context = needToUseSocksProxy(httpRequest.getURI())
+                ? SocksProxyHttpContext.create(proxyRule)
+                : HttpClientContext.create();
+
         CloseableHttpClient httpClient = httpClientManager.getHttpClient();
-        if(httpClient == null) {
+        if (httpClient == null) {
             throw new RuntimeException("http client is null");
         }
         HttpResponse httpResponse = null;
@@ -71,5 +81,9 @@ public class HttpToolProxy<T> implements InvocationHandler {
             System.out.println(e);
             throw e;
         }
+    }
+
+    private Boolean needToUseSocksProxy(URI uri) {
+        return uri != null &&  proxyRule != null && proxyRule.checkUseProxy(uri);
     }
 }

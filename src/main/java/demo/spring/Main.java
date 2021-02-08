@@ -20,8 +20,6 @@ public class Main {
 //
 //        System.out.println("\n\n\n");
 
-
-        HttpReqeustPostTest httpRequestRmiTest2 = (HttpReqeustPostTest)applicationContext.getBean("httpReqeustPostTest");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("mobilephone", "13611111111");
         jsonObject.put("password", "123456");
@@ -30,6 +28,21 @@ public class Main {
             put("name", "anyang");
 //            put("appName", "anyang");
         }};
+        HttpReqeustPostTest httpRequestRmiTest2 = (HttpReqeustPostTest)applicationContext.getBean("httpReqeustPostTest");
+
         httpRequestRmiTest2.getRemoteObj(jsonObject, header);
+
+//        for(int i = 0; i < 10; i++) {
+//            Runnable runnable = new Runnable() {
+//                @Override
+//                public void run() {
+//                    httpRequestRmiTest2.getRemoteObj(jsonObject, header);
+//                }
+//            };
+//            runnable.run();
+//        }
+
+
+
     }
 }

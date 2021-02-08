@@ -22,6 +22,7 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
 //    private StringValueResolver embeddedValueResolver;  // properties 解析
     private String httpClientManagerBeanName;
     private String propertiesResolverName;
+    private String proxyRuleName;
 //
 //    @Override
 //    public void setEmbeddedValueResolver(StringValueResolver resolver) {
@@ -58,6 +59,10 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
         this.nameGenerator = nameGenerator;
     }
 
+    public void setProxyRuleName(String proxyRuleName) {
+        this.proxyRuleName = proxyRuleName;
+    }
+
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
     }
@@ -77,6 +82,7 @@ public class HttpToolScannerConfigure implements BeanDefinitionRegistryPostProce
         scanner.setBeanNameGenerator(this.nameGenerator);
         scanner.setHttpClientManagerBeanName(this.httpClientManagerBeanName);
         scanner.setPropertiesResolverName(this.propertiesResolverName);
+        scanner.setProxyRuleName(proxyRuleName);
 //        scanner.setEmbeddedValueResolver(this.embeddedValueResolver);
         scanner.registerFilters();  // 在这里注册需要扫描出来的注解
         // 开始扫描
