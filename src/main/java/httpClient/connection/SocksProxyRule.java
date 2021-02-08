@@ -49,6 +49,9 @@ public class SocksProxyRule {
     }
 
     public void setSwitchOn(Boolean switchOn) {
+        if(switchOn == null) {
+            switchOn = false;
+        }
         this.switchOn = switchOn;
     }
 
