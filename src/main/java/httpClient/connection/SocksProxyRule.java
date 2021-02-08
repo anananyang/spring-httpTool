@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class SocksProxyRule {
 
     private static final String PROXY_CONFIG_SEPARATOR = ":";
-    private boolean switchOn = false;
+    private String switchOn = "OFF";
     private List<String> excludeRegexps;
     private List<Pattern> excludePatterns;
     private String proxy;
@@ -48,9 +48,9 @@ public class SocksProxyRule {
         }
     }
 
-    public void setSwitchOn(Boolean switchOn) {
+    public void setSwitchOn(String switchOn) {
         if(switchOn == null) {
-            switchOn = false;
+            switchOn = "OFF";
         }
         this.switchOn = switchOn;
     }
@@ -110,7 +110,7 @@ public class SocksProxyRule {
     }
 
     public Boolean isSwitchOn() {
-        return switchOn;
+        return "ON".equalsIgnoreCase(switchOn);
     }
 
     public Boolean isSocksProxy() {
