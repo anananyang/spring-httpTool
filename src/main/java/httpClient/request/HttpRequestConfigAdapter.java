@@ -1,5 +1,6 @@
 package httpClient.request;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
@@ -7,7 +8,9 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
+import org.springframework.util.StringValueResolver;
 import spring.PropertiesResolver;
+import util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,10 @@ public class HttpRequestConfigAdapter implements HttpRequestConfig {
     public HttpRequestCustomConfig httpRequestConfig;
     protected PropertiesResolver propertiesResolver;
 
+    private String url;
+    private Header[] headers;
+    private List<NameValuePair> params;
+
     public HttpRequestConfigAdapter(HttpRequestCustomConfig httpRequestConfig,
                                     PropertiesResolver propertiesResolver) {
 
@@ -27,7 +34,11 @@ public class HttpRequestConfigAdapter implements HttpRequestConfig {
 
 
     public String getUrl() {
-        return getDomain() + getPath();
+        if (StringUtils.isBlank(this.url)) {
+            this.url = getDomain() + getPath();
+        }
+
+        return this.url;
     }
 
     public String getDomain() {
@@ -42,6 +53,9 @@ public class HttpRequestConfigAdapter implements HttpRequestConfig {
     }
 
     public Header[] getHeaders() {
+        if(ArrayUtils.isNotEmpty(headers)) {
+            return headers;
+        }
         Map<String, String> headerMap = httpRequestConfig.getHeaderMap();
         if (headerMap == null || headerMap.isEmpty()) {
             return null;
@@ -55,8 +69,8 @@ public class HttpRequestConfigAdapter implements HttpRequestConfig {
             headers[index] = new BasicHeader(headerName, headerValue);
             index++;
         }
-
-        return headers;
+        this.headers = headers;
+        return this.headers;
     }
 
     public String getHeaderValue(String headerKey) {
@@ -67,11 +81,15 @@ public class HttpRequestConfigAdapter implements HttpRequestConfig {
         if (headerMap == null || headerMap.isEmpty()) {
             return null;
         }
-        return headerMap.get(headerKey);
+        String value = headerMap.get(headerKey);
+        return propertiesResolver.resolveStringValue(value);
     }
 
 
     public List<NameValuePair> getParameters() {
+        if (ListUtil.isNotEmpty(this.params)) {
+            return this.params;
+        }
         Map<String, String> paramMap = this.getParamMap();
         if (paramMap == null || paramMap.isEmpty()) {
             return null;
@@ -84,7 +102,8 @@ public class HttpRequestConfigAdapter implements HttpRequestConfig {
             list.add(new BasicNameValuePair(paramName, paramValue));
         }
 
-        return list;
+        this.params = list;
+        return this.params;
     }
 
 
@@ -174,7 +193,7 @@ public class HttpRequestConfigAdapter implements HttpRequestConfig {
         }
         String port = propertiesResolver.resolveStringValue(httpRequestConfig.getHttpProxyPort());
         String host = propertiesResolver.resolveStringValue(httpRequestConfig.getHttpProxyHost());
-        if(StringUtils.isBlank(port) || StringUtils.isBlank(host)) {
+        if (StringUtils.isBlank(port) || StringUtils.isBlank(host)) {
             return null;
         }
 

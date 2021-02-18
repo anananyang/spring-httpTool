@@ -5,6 +5,7 @@ target/*
 */target/*
 *.properties
 application.properties
+application-test.xml
 .idea
 .git
 *.iml

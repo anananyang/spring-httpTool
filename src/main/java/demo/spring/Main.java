@@ -21,13 +21,19 @@ public class Main {
 
 
     public static void main(String[] args) {
+        // set logger level
+        ch.qos.logback.classic.Logger log = (ch.qos.logback.classic.Logger)logger;
+        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+        StatusPrinter.print(lc);
+
+        // spring
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
 
 //
-//        HttpRequestGetTest httpRequestRmiTest = (HttpRequestGetTest)applicationContext.getBean("httpRequestGetTest");
-//        httpRequestRmiTest.getRemoteObj("index.html");
+        HttpRequestGetTest httpRequestRmiTest = (HttpRequestGetTest)applicationContext.getBean("httpRequestGetTest");
+        httpRequestRmiTest.getRemoteObj("index.html");
 //
-//        System.out.println("\n\n\n");
+        System.out.println("\n\n\n");
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("mobilephone", "13611111111");
@@ -50,12 +56,5 @@ public class Main {
 //            };
 //            runnable.run();
 //        }
-
-        // set its level
-        ch.qos.logback.classic.Logger log = (ch.qos.logback.classic.Logger)logger;
-        log.debug("finished");
-        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
-        StatusPrinter.print(lc);
-
     }
 }

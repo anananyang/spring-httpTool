@@ -32,7 +32,6 @@
         <property name="timeout" value="20000"></property>
         <property name="connectionTimeout" value="10000"></property>
         <property name="retryCount" value="1"></property>
-
     </bean>
 
     <bean id="proxyRule" class="httpClient.connection.SocksProxyRule">

@@ -1,7 +1,10 @@
 package httpClient.connection;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import util.ListUtil;
+import util.LogUtil;
 
 import java.net.*;
 import java.util.ArrayList;
@@ -10,6 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SocksProxyRule {
+
+    private static Logger logger = LoggerFactory.getLogger(SocksProxyRule.class);
 
     private static final String PROXY_CONFIG_SEPARATOR = ":";
     private String switchOn = "OFF";
@@ -26,30 +31,31 @@ public class SocksProxyRule {
 
     public SocksProxyRule() {
         localIp = this.getLocalIP();
-        System.out.println("local host ip is " + localIp);
+        if (localIp != null) {
+            LogUtil.debug(logger, "local host ip is {}", localIp);
+        }
     }
 
     private String getLocalIP() {
         try {
             return InetAddress.getByName(getHostName()).getHostAddress();
-        } catch (Exception e) {
-            // TODO log
+        } catch (UnknownHostException e) {
+            LogUtil.error(logger, e.getMessage(), e);
             return null;
         }
-
     }
 
     private String getHostName() {
         try {
             return InetAddress.getLocalHost().getHostName();
-        } catch (Exception e) {
-            // TODO log
+        } catch (UnknownHostException e) {
+            LogUtil.error(logger, e.getMessage(), e);
             return null;
         }
     }
 
     public void setSwitchOn(String switchOn) {
-        if(switchOn == null) {
+        if (switchOn == null) {
             switchOn = "OFF";
         }
         this.switchOn = switchOn;
@@ -177,7 +183,6 @@ public class SocksProxyRule {
         if (!isSwitchOn() || !isValidProxy()) {
             return null;
         }
-
         InetSocketAddress sa = new InetSocketAddress(this.getProxyHost(), this.getProxyPort());
         Proxy.Type type = isSocksProxy() ? Proxy.Type.SOCKS : Proxy.Type.HTTP;
         Proxy proxy = new Proxy(type, sa);

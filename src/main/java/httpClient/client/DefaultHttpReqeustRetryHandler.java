@@ -27,7 +27,6 @@ public class DefaultHttpReqeustRetryHandler implements HttpRequestRetryHandler {
     public boolean retryRequest(IOException exception,
                                 int executionCount,
                                 HttpContext context) {
-
         if (executionCount >= tryCount) {
             // Do not retry if over max retry count
             return false;

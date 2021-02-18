@@ -68,7 +68,7 @@ public class ClassPathHttpToolScanner extends ClassPathBeanDefinitionScanner {
     protected Set<BeanDefinitionHolder> doScan(String... basePackages) {
         Set<BeanDefinitionHolder> definitionHolders = super.doScan(basePackages);
         if (definitionHolders.isEmpty()) {
-            // TODO log
+
             return definitionHolders;
         }
 

@@ -8,6 +8,7 @@ public class HttpClientConfig {
     // manage connection pool
     private Integer totalMaxConnetions = 200;
     private Integer defaultMaxPerRoute = 20;
+    private Integer maxLogLen = 512;
 
 
     public Integer getTimeout() {
@@ -48,5 +49,13 @@ public class HttpClientConfig {
 
     public void setDefaultMaxPerRoute(Integer defaultMaxPerRoute) {
         this.defaultMaxPerRoute = defaultMaxPerRoute;
+    }
+
+    public Integer getMaxLogLen() {
+        return maxLogLen;
+    }
+
+    public void setMaxLogLen(Integer maxLogLen) {
+        this.maxLogLen = maxLogLen;
     }
 }
