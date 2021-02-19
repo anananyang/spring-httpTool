@@ -29,11 +29,11 @@ public class Main {
         // spring
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application.xml");
 
-//
-        HttpRequestGetTest httpRequestRmiTest = (HttpRequestGetTest)applicationContext.getBean("httpRequestGetTest");
-        httpRequestRmiTest.getRemoteObj("index.html");
-//
-        System.out.println("\n\n\n");
+////
+//        HttpRequestGetTest httpRequestRmiTest = (HttpRequestGetTest)applicationContext.getBean("httpRequestGetTest");
+//        httpRequestRmiTest.getRemoteObj("index.html");
+////
+//        System.out.println("\n\n\n");
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("mobilephone", "13611111111");
