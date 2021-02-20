@@ -130,7 +130,6 @@ public class HttpRequestConfigParser {
                                        Object arg) {
         Annotation[] annotations = parameter.getAnnotations();
         if(ArrayUtils.isEmpty(annotations)) {
-            // TODO param does not have any annotations
             return;
         }
         for (Annotation annotation : annotations) {
