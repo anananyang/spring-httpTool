@@ -9,13 +9,15 @@ import java.util.List;
 
 public class ListUtilTest {
 
-
     @Test
     public void isEmptyTest() {
-        List<Integer> list = new ArrayList<>();
+        List<Integer> list = null;
+        Assert.assertTrue(ListUtil.isEmpty(list));
+        list = new ArrayList<>();
         Assert.assertTrue(ListUtil.isEmpty(list));
         list.add(1);
         Assert.assertFalse(ListUtil.isEmpty(list));
     }
+
 
 }
