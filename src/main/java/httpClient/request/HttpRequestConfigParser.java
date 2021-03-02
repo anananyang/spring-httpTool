@@ -3,6 +3,9 @@ package httpClient.request;
 import httpClient.annoParser.*;
 import httpClient.annotation.*;
 import org.apache.commons.lang3.ArrayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import util.LogUtil;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -11,6 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HttpRequestConfigParser {
+
+    private static final Logger logger = LoggerFactory.getLogger(HttpRequestConfigParser.class);
 
     /**
      * 维护类注解和方法注解解析器
@@ -130,7 +135,7 @@ public class HttpRequestConfigParser {
                                        Object arg) {
         Annotation[] annotations = parameter.getAnnotations();
         if(ArrayUtils.isEmpty(annotations)) {
-            // TODO param does not have any annotations
+            LogUtil.info(logger, "param {} does not have any annotations", parameter.getName());
             return;
         }
         for (Annotation annotation : annotations) {

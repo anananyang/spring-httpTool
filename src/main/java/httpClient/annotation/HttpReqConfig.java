@@ -15,7 +15,7 @@ public @interface HttpReqConfig {
 
     String entityType() default HttpEntityType.STRING;
 
-    String path();
+    String path() default "";
 
     int connectTimeout() default -1;
 

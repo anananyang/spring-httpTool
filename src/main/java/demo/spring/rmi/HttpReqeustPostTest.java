@@ -15,6 +15,7 @@ public interface HttpReqeustPostTest {
     @HttpReqConfig(httpMethod = HttpMethod.POST, path = "/user/login")
     @HttpReqProxy(proxyHost = "${anyang.http.proxy.host}", proxyPort = "${anyang.http.proxy.port}")
     String getRemoteObj(@HttpReqBody JSONObject object,
-                        @HttpReqHeader Map<String, String> header);
+                        @HttpReqHeader Map<String, String> header,
+                        @HttpReqParam("paramTest") Long paramTest);
 
 }

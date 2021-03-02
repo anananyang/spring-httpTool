@@ -45,7 +45,7 @@ public class Main {
         }};
         HttpReqeustPostTest httpRequestRmiTest2 = (HttpReqeustPostTest)applicationContext.getBean("httpReqeustPostTest");
 
-        httpRequestRmiTest2.getRemoteObj(jsonObject, header);
+        httpRequestRmiTest2.getRemoteObj(jsonObject, header, 1l);
 
 //        for(int i = 0; i < 10; i++) {
 //            Runnable runnable = new Runnable() {
